@@ -1,4 +1,3 @@
-
 // Game configuration
 const config = {
     type: Phaser.AUTO,
