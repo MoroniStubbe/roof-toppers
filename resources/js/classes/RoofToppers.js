@@ -18,6 +18,9 @@ class RoofToppers extends Phaser.Scene {
     }
 
     create() {
+        const BACKGROUND = this.add.image(0, 0, 'background_image');
+        BACKGROUND.setOrigin(0, 0);  // Set the origin to the top-left corner
+        BACKGROUND.setDisplaySize(this.game.config.width, this.game.config.height);
         this.create_platforms();
     }
 
