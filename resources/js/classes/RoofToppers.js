@@ -18,6 +18,7 @@ class RoofToppers extends Phaser.Scene {
     }
 
     create() {
+        this.create_platforms();
     }
 
     update() {
