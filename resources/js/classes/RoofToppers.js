@@ -4,6 +4,10 @@ class RoofToppers extends Phaser.Scene {
     }
 
     preload() {
+        const URL = window.location.href;
+        this.load.image('background_image', URL + 'img/gordon.jpg');
+        this.load.image('platform_image', URL + 'img/gj.jpg');
+    }
 
     create_platforms() {
         this.platforms = this.physics.add.staticGroup();
