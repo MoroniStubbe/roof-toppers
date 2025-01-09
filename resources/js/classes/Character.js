@@ -49,11 +49,6 @@ class Character {
         // Jumping
         if (this.keys.jump.isDown && this.sprite.body.blocked.down) {
             this.sprite.setVelocityY(-330); // Jump upward
-            if (this.keys.left.isDown) {
-                this.sprite.anims.play('jumpLeft', true); // Jump left animation
-            } else if (this.keys.right.isDown) {
-                this.sprite.anims.play('jumpRight', true); // Jump right animation
-            }
         }
 
         // Maintain jump animation in the air
