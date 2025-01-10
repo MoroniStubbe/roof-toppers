@@ -1,13 +1,13 @@
 // Game configuration
 const CONFIG = {
     type: Phaser.AUTO,
-    width: 960,
-    height: 540,
+    width: 1080,
+    height: 1080,
     scene: RoofToppers,
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
+            gravity: { y: 3000 },
             debug: false
         }
     },
