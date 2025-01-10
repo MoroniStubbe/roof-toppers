@@ -2,7 +2,7 @@
 const CONFIG = {
     type: Phaser.AUTO,
     width: 960,
-    height: 1000,
+    height: 850,
     scene: RoofToppers,
     physics: {
         default: 'arcade',
