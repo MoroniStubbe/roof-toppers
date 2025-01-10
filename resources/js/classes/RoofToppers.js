@@ -8,6 +8,7 @@ class RoofToppers extends Phaser.Scene {
 
         // Load background, platform, and player sprite
         this.load.image('background_image', URL + 'img/gordon.jpg');
+        this.load.image('floor_image', URL + 'img/gray.jpg');
         this.load.image('platform_image', URL + 'img/gj.jpg');
         this.load.image('wall_image', URL + 'img/jeff.jpg');
         this.load.image('finish_image', URL + 'img/gj.jpg');
@@ -24,6 +25,18 @@ class RoofToppers extends Phaser.Scene {
             this.platforms.add(platform);
         });
     }
+
+    create_platformsL() {
+        this.platformsL = this.physics.add.staticGroup();
+
+        PLATFORMSL_CONFIG.forEach(platformL_data => {
+            const platformL = this.add.existing(
+                new PlatformL(this, platformL_data.x, platformL_data.y)
+            );
+            this.platformsL.add(platformL);
+        });
+    }
+
     create_walls() {
         this.walls = this.physics.add.staticGroup();
 
@@ -42,12 +55,14 @@ class RoofToppers extends Phaser.Scene {
         BACKGROUND.setDisplaySize(this.game.config.width, this.game.config.height);
 
         this.create_platforms();
+        this.create_platformsL();
         this.create_walls();
         this.finish = new Finish(this, 200, 200);
-        this.player = new Character(this, 100, 999999, 'player', 64, 64);
+        this.player = new Character(this, 100, 1000, 'player', 64, 64);
 
         // Add collision between the player and platforms
         this.physics.add.collider(this.player.sprite, this.platforms);
+        this.physics.add.collider(this.player.sprite, this.platformsL);
         this.physics.add.collider(this.player.sprite, this.walls);
         this.physics.add.collider(this.player.sprite, this.finish, this.finish.handleFinish, null, this.finish);
 

@@ -17,3 +17,6 @@ const WALLS_CONFIG = [
     { x: 400, y: 350},
     { x: 450, y: 200},
 ]
+const PLATFORMSL_CONFIG = [
+    { x: 0, y: 1069 },
+];
