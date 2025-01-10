@@ -9,6 +9,7 @@ class RoofToppers extends Phaser.Scene {
         // Load background, platform, and player sprite
         this.load.image('background_image', URL + 'img/gordon.jpg');
         this.load.image('platform_image', URL + 'img/gj.jpg');
+        this.load.image('wall_image', URL + 'img/jeff.jpg');
         this.load.spritesheet('player', URL + 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
     }
 
@@ -22,6 +23,16 @@ class RoofToppers extends Phaser.Scene {
             this.platforms.add(platform);
         });
     }
+    create_walls() {
+        this.walls = this.physics.add.staticGroup();
+
+        WALLS_CONFIG.forEach(wall_data => {
+            const wall = this.add.existing(
+                new Wall(this, wall_data.x, wall_data.y)
+            );
+            this.walls.add(wall);
+        });
+    }
 
     create() {
         // Create background
@@ -31,12 +42,14 @@ class RoofToppers extends Phaser.Scene {
 
         // Create platforms
         this.create_platforms();
+        this.create_walls();
 
         // Create player character
-        this.player = new Character(this, 100, 400, 'player', 64, 64);
+        this.player = new Character(this, 100, 999999, 'player', 64, 64);
 
         // Add collision between the player and platforms
         this.physics.add.collider(this.player.sprite, this.platforms);
+        this.physics.add.collider(this.player.sprite, this.walls);
     }
 
     update() {
