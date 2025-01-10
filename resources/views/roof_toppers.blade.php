@@ -10,6 +10,7 @@
     <script src="../node_modules/phaser/dist/phaser.js"></script>
     <script src="../resources/js/config/level.js"></script>
     <script src="../resources/js/classes/Platform.js"></script>
+    <script src="../resources/js/classes/Finish.js"></script>
     <script src="../resources/js/classes/RoofToppers.js"></script>
     <script src="../resources/js/classes/Character.js"></script>
     <script src="../resources/js/roof_toppers.js"></script>
