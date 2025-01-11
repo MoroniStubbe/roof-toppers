@@ -42,8 +42,6 @@ class StartScreen extends Phaser.Scene {
     }
 
     exitGame() {
-        console.log("Exit button clicked");
-        // Here you can add your logic to exit the game or go to a previous scene
-        // For example: this.game.destroy(true);
+        window.location.href = "../public/";
     }
 }
