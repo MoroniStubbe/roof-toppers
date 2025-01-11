@@ -38,9 +38,7 @@ class StartScreen extends Phaser.Scene {
     }
 
     showScoreboard() {
-        console.log("Scoreboard button clicked");
-        // Here you can add your logic to show the scoreboard scene
-        // For example: this.scene.start('ScoreboardScene');
+        window.location.href = "../public/scoreboard";
     }
 
     exitGame() {
