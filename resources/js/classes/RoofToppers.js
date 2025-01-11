@@ -14,6 +14,10 @@ class RoofToppers extends Phaser.Scene {
         this.load.spritesheet('player', URL + 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
     }
 
+    init() {
+        this.startTime = this.time.now;
+    }
+
     create_platforms() {
         this.platforms = this.physics.add.staticGroup();
 
@@ -24,6 +28,7 @@ class RoofToppers extends Phaser.Scene {
             this.platforms.add(platform);
         });
     }
+
     create_walls() {
         this.walls = this.physics.add.staticGroup();
 
@@ -33,6 +38,10 @@ class RoofToppers extends Phaser.Scene {
             );
             this.walls.add(wall);
         });
+    }
+
+    getElapsedTime() {
+        return Math.floor((this.time.now - this.startTime) / 1000);
     }
 
     create() {
@@ -52,10 +61,16 @@ class RoofToppers extends Phaser.Scene {
         this.physics.add.collider(this.player.sprite, this.finish, (player, platform) => {
             this.finish.handleFinish(player, platform, this);
         });
+
+        // Add timer text
+        this.timerText = this.add.text(10, 10, 'Time: 0', {
+            fontSize: '20px',
+            fill: '#ffffff'
+        }).setScrollFactor(0); // Keep text fixed on the screen
     }
 
     update() {
-        // Update player character
         this.player.update();
+        this.timerText.setText('Time: ' + this.getElapsedTime());
     }
 }
