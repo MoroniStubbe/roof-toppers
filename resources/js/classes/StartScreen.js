@@ -4,10 +4,14 @@ class StartScreen extends Phaser.Scene {
     }
 
     preload() {
-
+        this.load.image('background', 'img/yafrietsky.png');
     }
 
     create() {
+        const BACKGROUND = this.add.image(0, 0, 'background');
+        BACKGROUND.setOrigin(0, 0);
+        BACKGROUND.setDisplaySize(this.game.config.width, this.game.config.height);
+
         // Create Start button
         const startButton = this.add.text(300, 200, 'Start Game', { font: '32px Arial', fill: '#ffffff' })
             .setInteractive()
@@ -34,14 +38,10 @@ class StartScreen extends Phaser.Scene {
     }
 
     showScoreboard() {
-        console.log("Scoreboard button clicked");
-        // Here you can add your logic to show the scoreboard scene
-        // For example: this.scene.start('ScoreboardScene');
+        window.location.href = "../public/scoreboard";
     }
 
     exitGame() {
-        console.log("Exit button clicked");
-        // Here you can add your logic to exit the game or go to a previous scene
-        // For example: this.game.destroy(true);
+        window.location.href = "../public/";
     }
 }
