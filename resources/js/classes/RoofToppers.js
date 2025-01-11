@@ -14,6 +14,10 @@ class RoofToppers extends Phaser.Scene {
         this.load.spritesheet('player', URL + 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
     }
 
+    init() {
+        this.startTime = this.time.now;
+    }
+
     create_platforms() {
         this.platforms = this.physics.add.staticGroup();
 
@@ -24,6 +28,7 @@ class RoofToppers extends Phaser.Scene {
             this.platforms.add(platform);
         });
     }
+
     create_walls() {
         this.walls = this.physics.add.staticGroup();
 
@@ -35,6 +40,10 @@ class RoofToppers extends Phaser.Scene {
         });
     }
 
+    getElapsedTime() {
+        return Math.floor((this.time.now - this.startTime) / 1000);
+    }
+
     create() {
         // Create background
         const BACKGROUND = this.add.image(0, 0, 'background_image');
@@ -43,24 +52,25 @@ class RoofToppers extends Phaser.Scene {
 
         this.create_platforms();
         this.create_walls();
-        this.finish = new Finish(this, 200, 200);
+        this.finish = new Finish(this, 1000, 1000);
         this.player = new Character(this, 100, 999999, 'player', 64, 64);
 
         // Add collision between the player and platforms
         this.physics.add.collider(this.player.sprite, this.platforms);
         this.physics.add.collider(this.player.sprite, this.walls);
-        this.physics.add.collider(this.player.sprite, this.finish, this.finish.handleFinish, null, this.finish);
-
-        // Add finish event listener
-        this.events.on('levelFinished', () => {
-            console.log('Player has completed the level!');
-            // Add logic for transitioning to the next level or displaying a completion message
-            this.scene.start('RoofToppers'); // Example: Transition to the next scene
+        this.physics.add.collider(this.player.sprite, this.finish, (player, platform) => {
+            this.finish.handleFinish(player, platform, this);
         });
+
+        // Add timer text
+        this.timerText = this.add.text(10, 10, 'Time: 0', {
+            fontSize: '20px',
+            fill: '#ffffff'
+        }).setScrollFactor(0); // Keep text fixed on the screen
     }
 
     update() {
-        // Update player character
         this.player.update();
+        this.timerText.setText('Time: ' + this.getElapsedTime());
     }
 }
