@@ -1,4 +1,9 @@
 body {
   display: flex;
   justify-content: center;
-}/*# sourceMappingURL=roof_toppers.css.map */
+}
+body canvas {
+  height: 100vh;
+}
+
+/*# sourceMappingURL=roof_toppers.css.map */
