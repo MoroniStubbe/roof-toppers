@@ -2,31 +2,42 @@ class CustomCamera {
     constructor(scene) {
         this.scene = scene;
         this.camera = scene.cameras.main;
-        this.cameraSpeed = 2000;
+        this.cameraSpeed = 500;
+        this.floor = 1;
+        this.cameraMoving = false;
     }
 
-    // Move the camera up
-    moveUp() {
-        this.camera.once('camerapancomplete', this.onPanComplete, this);
-        this.camera.pan(this.camera.centerX, this.floor * -1080 - 1080, this.cameraSpeed);
+    getFloor() {
+        return Math.floor(this.scene.player.sprite.y / 540);
     }
 
-    // Move the camera down
-    moveDown() {
-        this.camera.pan(this.camera.centerX, this.floor, this.cameraSpeed);
-    }
+    onFloorChange(floor) {
+        this.cameraMoving = true;
 
-    // Update method to check the player's position
-    update() {
-        if (this.scene.player.sprite.y <= 100) {
-            this.moveUp();
-        } else if (this.scene.player.sprite.y >= 980) {
-            this.moveDown();
+        if (floor === 1) {
+            this.camera.pan(this.camera.centerX, 540, this.cameraSpeed, 'Linear', false, () => this.onPanComplete(floor));
+        }
+        else {
+            this.moveToFloor(floor);
         }
     }
 
-    // You can listen to camera pan events here, e.g., when pan is complete
-    onPanComplete() {
-        console.log('Camera pan completed!');
+    onPanComplete(floor) {
+        this.floor = floor;
+        this.cameraMoving = false;
+    }
+
+    moveToFloor(floor) {
+        this.camera.pan(this.camera.centerX, this.scene.game.config.height / 2 + 540 * floor - 400, this.cameraSpeed, 'Linear', false, () => this.onPanComplete(floor));
+    }
+
+    update() {
+        if (!this.cameraMoving && this.scene.player.sprite.body.blocked.down) {
+            const floor = this.getFloor();
+
+            if (floor !== this.floor) {
+                this.onFloorChange(floor);
+            }
+        }
     }
 }
