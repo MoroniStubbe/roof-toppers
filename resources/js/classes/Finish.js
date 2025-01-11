@@ -11,8 +11,6 @@ class Finish extends Phaser.GameObjects.TileSprite {
     // Handle the finish platform logic
     handleFinish(player, platform, scene) {
         if (player.body && platform.body && player.body.touching.down) { // Check if the player is landing on the finish
-            // Trigger an event, callback, or update game state
-            console.log('Level Finished!');
             scene.scene.start('StartScreen');
         }
     }
