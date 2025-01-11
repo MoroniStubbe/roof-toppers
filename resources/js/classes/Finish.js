@@ -3,7 +3,7 @@ class Finish extends Phaser.GameObjects.TileSprite {
         super(scene, x, y, 50, 50, 'finish_image');
         scene.add.existing(this);
         this.setOrigin(0, 0);
-        const TILE_SCALE = 0.07;
+        const TILE_SCALE = 0.22;
         this.setTileScale(TILE_SCALE, TILE_SCALE);
         scene.physics.add.existing(this, true);
     }
