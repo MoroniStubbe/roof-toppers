@@ -4,10 +4,14 @@ class StartScreen extends Phaser.Scene {
     }
 
     preload() {
-
+        this.load.image('background', 'img/yafrietsky.png');
     }
 
     create() {
+        const BACKGROUND = this.add.image(0, 0, 'background');
+        BACKGROUND.setOrigin(0, 0);
+        BACKGROUND.setDisplaySize(this.game.config.width, this.game.config.height);
+
         // Create Start button
         const startButton = this.add.text(300, 200, 'Start Game', { font: '32px Arial', fill: '#ffffff' })
             .setInteractive()
