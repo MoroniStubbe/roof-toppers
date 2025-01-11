@@ -25,6 +25,11 @@ class StartScreen extends Phaser.Scene {
     }
 
     startGame() {
+        if (this.scene.get('RoofToppers')) {
+            this.scene.remove('RoofToppers');
+        }
+
+        this.scene.add('RoofToppers', RoofToppers);
         this.scene.start('RoofToppers');
     }
 
