@@ -13,6 +13,7 @@
     <script src="../resources/js/classes/Wall.js"></script>
     <script src="../resources/js/classes/Finish.js"></script>
     <script src="../resources/js/classes/RoofToppers.js"></script>
+    <script src="../resources/js/classes/StartScreen.js"></script>
     <script src="../resources/js/classes/Character.js"></script>
     <script src="../resources/js/roof_toppers.js"></script>
 </head>

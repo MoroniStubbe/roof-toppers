@@ -43,19 +43,14 @@ class RoofToppers extends Phaser.Scene {
 
         this.create_platforms();
         this.create_walls();
-        this.finish = new Finish(this, 200, 200);
+        this.finish = new Finish(this, 1000, 1000);
         this.player = new Character(this, 100, 999999, 'player', 64, 64);
 
         // Add collision between the player and platforms
         this.physics.add.collider(this.player.sprite, this.platforms);
         this.physics.add.collider(this.player.sprite, this.walls);
-        this.physics.add.collider(this.player.sprite, this.finish, this.finish.handleFinish, null, this.finish);
-
-        // Add finish event listener
-        this.events.on('levelFinished', () => {
-            console.log('Player has completed the level!');
-            // Add logic for transitioning to the next level or displaying a completion message
-            this.scene.start('RoofToppers'); // Example: Transition to the next scene
+        this.physics.add.collider(this.player.sprite, this.finish, (player, platform) => {
+            this.finish.handleFinish(player, platform, this);
         });
     }
 
