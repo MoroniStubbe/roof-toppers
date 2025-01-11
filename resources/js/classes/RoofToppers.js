@@ -66,7 +66,12 @@ class RoofToppers extends Phaser.Scene {
         this.create_platformsL();
         this.create_walls();
         this.finish = new Finish(this, 200, 200);
+
         this.player = new Character(this, 100, 1000, 'player', 64, 64);
+
+        this.camera = new CustomCamera(this);
+
+        this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height, true, true, false, true);
 
         // Add collision between the player and platforms
         this.physics.add.collider(this.player.sprite, this.platforms);
@@ -85,6 +90,7 @@ class RoofToppers extends Phaser.Scene {
 
     update() {
         this.player.update();
+        this.camera.update();
         this.timerText.setText('Time: ' + this.getElapsedTime());
     }
 }
