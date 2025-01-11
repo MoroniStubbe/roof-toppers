@@ -1,13 +1,13 @@
 // Game configuration
 const CONFIG = {
     type: Phaser.AUTO,
-    width: window.innerWidth,
-    height: window.innerHeight - 1, //offset by 1 to remove scroll
+    width: 1080,
+    height: 1080,
     scene: RoofToppers,
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
+            gravity: { y: 3000 },
             debug: false
         }
     },
