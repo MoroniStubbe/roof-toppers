@@ -9,5 +9,8 @@ class GameFinished extends Phaser.Scene {
     }
 
     create() {
+        // Set background color
+        this.cameras.main.setBackgroundColor('#000');
+
     }
 }
