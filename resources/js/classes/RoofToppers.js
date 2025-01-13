@@ -75,7 +75,7 @@ class RoofToppers extends Phaser.Scene {
 
         // Add collision between the player and platforms
         this.physics.add.collider(this.player.sprite, this.platforms);
-        this.physics.add.collider(this.player.sprite, this.groundfloor);
+        this.physics.add.collider(this.player.sprite, this.floor);
         this.physics.add.collider(this.player.sprite, this.walls);
         this.physics.add.collider(this.player.sprite, this.finish, (player, platform) => {
             this.finish.handleFinish(player, platform, this);
