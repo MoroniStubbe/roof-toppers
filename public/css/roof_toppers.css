@@ -1,6 +1,9 @@
 body {
   display: flex;
   justify-content: center;
+  background-image: url('../img/dungeon_bg.png');
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
 }
 body canvas {
   height: 100vh;
