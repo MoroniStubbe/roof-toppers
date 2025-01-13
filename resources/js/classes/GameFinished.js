@@ -18,5 +18,10 @@ class GameFinished extends Phaser.Scene {
             color: '#fff',
         }).setOrigin(0.5);
 
+        // Display the player's score
+        this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, `Your score is: ${this.score}`, {
+            fontSize: '24px',
+            color: '#fff',
+        }).setOrigin(0.5);
     }
 }
