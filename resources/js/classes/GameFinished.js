@@ -37,3 +37,7 @@ class GameFinished extends Phaser.Scene {
         });
     }
 }
+
+// To use this scene, add it to your Phaser game configuration and pass the score when switching to it:
+//
+// this.scene.start('FinishScene', { score: playerScore });
