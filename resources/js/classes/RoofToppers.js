@@ -78,7 +78,7 @@ class RoofToppers extends Phaser.Scene {
         }).setScrollFactor(0); // Keep text fixed on the screen
 
         // Add Lava
-        this.lava = this.add.rectangle(0, this.game.config.height, this.game.config.width, -9999, 0xff4500).setOrigin(0, 1);
+        this.lava = this.add.tileSprite(0, this.game.config.height, this.game.config.width, -9999, 'lava_image').setOrigin(0, 1);
         this.physics.add.existing(this.lava);
         this.lava.body.setImmovable(true);
         this.lava.body.setAllowGravity(false);
