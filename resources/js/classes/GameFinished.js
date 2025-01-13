@@ -3,6 +3,10 @@ class GameFinished extends Phaser.Scene {
         super({ key: 'GameFinished' });
     }
 
+    init(data) {
+        // Receive the score from the previous scene
+        this.score = data.score || 0;
+    }
 
     create() {
     }
