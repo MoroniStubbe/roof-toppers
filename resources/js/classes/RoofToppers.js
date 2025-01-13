@@ -53,7 +53,6 @@ class RoofToppers extends Phaser.Scene {
         BACKGROUND.setDisplaySize(this.game.config.width, this.game.config.height);
 
         this.create_platforms();
-        this.platforms.add(new GroundFloor(this, GROUNDFLOOR_CONFIG.x, GROUNDFLOOR_CONFIG.y));
         this.create_walls();
         this.finish = new Finish(this, 200, 200);
 
@@ -65,7 +64,6 @@ class RoofToppers extends Phaser.Scene {
 
         // Add collision between the player and platforms
         this.physics.add.collider(this.player.sprite, this.platforms);
-        this.physics.add.collider(this.player.sprite, this.ground_floor);
         this.physics.add.collider(this.player.sprite, this.walls);
         this.physics.add.collider(this.player.sprite, this.finish, (player, platform) => {
             this.finish.handleFinish(player, platform, this);
@@ -77,21 +75,12 @@ class RoofToppers extends Phaser.Scene {
             fill: '#ffffff'
         }).setScrollFactor(0); // Keep text fixed on the screen
 
-        // Add Lava
-        this.lava = this.add.tileSprite(0, this.game.config.height, this.game.config.width, -9999, 'lava_image').setOrigin(0, 1);
-        this.physics.add.existing(this.lava);
-        this.lava.body.setImmovable(true);
-        this.lava.body.setAllowGravity(false);
-
-        // Add collision detection between player and lava
-        this.physics.add.overlap(this.player.sprite, this.lava, this.handleLavaCollision, null, this);
-
-        this.lavaRiseSpeed = 0.5;
-        this.gameOver = false;
+        // Initialize the Lava object
+        this.lava = new Lava(this);
     }
 
     update() {
-        if (this.gameOver) {
+        if (this.lava.gameOver) {
             return;
         }
 
@@ -100,62 +89,12 @@ class RoofToppers extends Phaser.Scene {
         this.camera.update();
         this.timerText.setText('Time: ' + this.getElapsedTime());
 
-        // Slowly rise the lava
-        this.lava.y -= this.lavaRiseSpeed;
-
-        // Check if player is below lava level
-        if (this.player.sprite.y > this.lava.y) {
-            this.handleLavaCollision();
-        }
+        // Update lava
+        this.lava.update();
     }
 
-    handleLavaCollision() {
-        this.gameOver = true;
-    
-        this.player.sprite.setTint(0xff0000);
-        this.player.sprite.setVelocity(0, 0);
-    
-        const overlay = this.add.rectangle(
-            this.game.config.width / 2,  
-            this.game.config.height / 2, 
-            this.game.config.width,      
-            this.game.config.height,     
-            0x000000,                    
-            0.7                          
-        ).setScrollFactor(0); // Keep the overlay fixed on the screen
-    
-        // Add "Game Over" text in the center
-        const gameOverText = this.add.text(
-            this.game.config.width / 2,  // Center X
-            this.game.config.height / 2 - 50, // Center Y (adjusted for "Game Over" to not overlap with button)
-            'Game Over',                 // Text to display
-            {
-                fontSize: '40px',        // Font size
-                fill: '#ffffff',         // Text color
-                fontStyle: 'bold',       // Bold text
-            }
-        ).setOrigin(0.5);
-    
-        // Create retry button text
-        const retryButton = this.add.text(
-            this.game.config.width / 2,  // Center X
-            this.game.config.height / 2 + 50, // Center Y (below the "Game Over" text)
-            'Retry',                    // Button text
-            {
-                fontSize: '30px',        // Font size
-                fill: '#00ff00',         // Button color (green)
-                fontStyle: 'bold',       // Bold text
-            }
-        ).setOrigin(0.5).setInteractive(); // Make the button interactive (clickable)
-    
-        // Button click event to restart the game
-        retryButton.on('pointerdown', () => {
-            this.restartGame();
-        });
-    }
-
+    // Restart the game by reloading the current scene
     restartGame() {
         this.scene.restart(); // This will restart the current scene
     }
-    
 }
