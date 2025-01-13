@@ -14,6 +14,4 @@ const WALLS_CONFIG = [
     { x: 750, y: 150 },
 ];
 
-const GROUNDFLOOR_CONFIG = [
-    { x: 0, y: 1069 },
-];
+const GROUNDFLOOR_CONFIG = { x: 0, y: 1069 };
