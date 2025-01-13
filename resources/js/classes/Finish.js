@@ -11,7 +11,7 @@ class Finish extends Phaser.GameObjects.TileSprite {
     // Handle the finish platform logic
     handleFinish(player, platform, scene) {
         if (player.body && platform.body && player.body.touching.down) { // Check if the player is landing on the finish
-            scene.scene.start('StartScreen');
+            scene.scene.start('GameFinished', { score: scene.getElapsedTime() });
         }
     }
 }

@@ -57,6 +57,10 @@ class RoofToppers extends Phaser.Scene {
     }
 
     create() {
+        if (!this.scene.get('GameFinished')) {
+            this.scene.add('GameFinished', GameFinished);
+        }
+
         // Create background
         const BACKGROUND = this.add.image(0, 0, 'background_image');
         BACKGROUND.setOrigin(0, 0);
