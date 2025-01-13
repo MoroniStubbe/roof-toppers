@@ -30,14 +30,14 @@ class RoofToppers extends Phaser.Scene {
         });
     }
 
-    create_platformsL() {
-        this.platformsL = this.physics.add.staticGroup();
+    create_groundfloor() {
+        this.floor = this.physics.add.staticGroup();
 
-        PLATFORMSL_CONFIG.forEach(platformL_data => {
-            const platformL = this.add.existing(
-                new PlatformL(this, platformL_data.x, platformL_data.y)
+        GROUNDFLOOR_CONFIG.forEach(groundfloor_data => {
+            const groundfloor = this.add.existing(
+                new Groundfloor(this, groundfloor_data.x, groundfloor_data.y)
             );
-            this.platformsL.add(platformL);
+            this.floor.add(groundfloor);
         });
     }
 
@@ -63,7 +63,7 @@ class RoofToppers extends Phaser.Scene {
         BACKGROUND.setDisplaySize(this.game.config.width, this.game.config.height);
 
         this.create_platforms();
-        this.create_platformsL();
+        this.create_groundfloor();
         this.create_walls();
         this.finish = new Finish(this, 200, 200);
 
@@ -75,7 +75,7 @@ class RoofToppers extends Phaser.Scene {
 
         // Add collision between the player and platforms
         this.physics.add.collider(this.player.sprite, this.platforms);
-        this.physics.add.collider(this.player.sprite, this.platformsL);
+        this.physics.add.collider(this.player.sprite, this.groundfloor);
         this.physics.add.collider(this.player.sprite, this.walls);
         this.physics.add.collider(this.player.sprite, this.finish, (player, platform) => {
             this.finish.handleFinish(player, platform, this);

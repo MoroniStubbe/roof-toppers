@@ -9,7 +9,7 @@ class Platform extends Phaser.GameObjects.TileSprite {
     }
 }
 
-class PlatformL extends Phaser.GameObjects.TileSprite {
+class Groundfloor extends Phaser.GameObjects.TileSprite {
     constructor(scene, x, y) {
         super(scene, x, y, 1080, 50, 'floor_image');
         scene.add.existing(this);

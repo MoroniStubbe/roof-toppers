@@ -14,6 +14,6 @@ const WALLS_CONFIG = [
     { x: 750, y: 150 },
 ];
 
-const PLATFORMSL_CONFIG = [
+const GROUNDFLOOR_CONFIG = [
     { x: 0, y: 1069 },
 ];
