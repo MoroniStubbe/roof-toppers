@@ -6,13 +6,14 @@ class RoofToppers extends Phaser.Scene {
     preload() {
         const URL = window.location.href;
 
-        // Load background, platform, and player sprite
+        // Load background, platform, player sprite, and lava texture
         this.load.image('background_image', URL + 'img/gordon.jpg');
         this.load.image('floor_image', URL + 'img/gray.jpg');
         this.load.image('platform_image', URL + 'img/gj.jpg');
         this.load.image('wall_image', URL + 'img/jeff.jpg');
         this.load.image('finish_image', URL + 'img/yafrietsky.png');
         this.load.spritesheet('player', URL + 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
+        this.load.image('lava_image', URL + 'img/lava.jpg');
     }
 
     init() {
@@ -75,11 +76,47 @@ class RoofToppers extends Phaser.Scene {
             fontSize: '20px',
             fill: '#ffffff'
         }).setScrollFactor(0); // Keep text fixed on the screen
+
+        // Add Lava
+        this.lava = this.add.rectangle(0, this.game.config.height, this.game.config.width, -9999, 0xff4500).setOrigin(0, 1);
+        this.physics.add.existing(this.lava);
+        this.lava.body.setImmovable(true);
+        this.lava.body.setAllowGravity(false);
+
+        // Add collision detection between player and lava
+        this.physics.add.overlap(this.player.sprite, this.lava, this.handleLavaCollision, null, this);
+
+        this.lavaRiseSpeed = 0.5; // Lava rise speed (pixels per frame)
+        this.gameOver = false;
     }
 
     update() {
+        if (this.gameOver) {
+            return;
+        }
+
+        // Update player and camera
         this.player.update();
         this.camera.update();
         this.timerText.setText('Time: ' + this.getElapsedTime());
+
+        // Slowly rise the lava
+        this.lava.y -= this.lavaRiseSpeed;
+
+        // Check if player is below lava level
+        if (this.player.sprite.y > this.lava.y) {
+            this.handleLavaCollision();
+        }
+    }
+
+    handleLavaCollision() {
+        // Handle player death when touching lava
+        this.gameOver = true;
+        this.player.sprite.setTint(0xff0000); // Turn the player red
+        this.player.sprite.setVelocity(0, 0); // Stop the player
+        this.add.text(this.game.config.width / 2 - 100, this.game.config.height / 2, 'Game Over', {
+            fontSize: '40px',
+            fill: '#ffffff',
+        }).setOrigin(0.5);
     }
 }
