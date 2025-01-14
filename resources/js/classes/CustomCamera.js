@@ -5,6 +5,7 @@ class CustomCamera {
         this.cameraSpeed = 500;
         this.floor = 1;
         this.cameraMoving = false;
+        this.camera.y_value = 0;
     }
 
     getFloor() {
@@ -25,6 +26,9 @@ class CustomCamera {
     onPanComplete(floor) {
         this.floor = floor;
         this.cameraMoving = false;
+        if (floor !== 1) {
+            this.camera.y_value = this.scene.game.config.height / 2 + 540 * floor - 940;
+        }
     }
 
     moveToFloor(floor) {
