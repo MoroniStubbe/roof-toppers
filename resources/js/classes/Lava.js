@@ -47,20 +47,23 @@ class Lava {
     }
 
     createGameOverScreen() {
+        const gameoverw = this.scene.game.config.width / 2;
+        const gameoverh = this.scene.camera.camera.centerY;
+
         // Dark transparent overlay
         const overlay = this.scene.add.rectangle(
-            this.scene.game.config.width / 2, 
-            this.scene.game.config.height / 2, 
-            this.scene.game.config.width, 
-            this.scene.game.config.height, 
+            gameoverw,
+            gameoverh,
+            this.scene.game.config.width,
+            this.scene.game.config.height,
             0x000000, 
             0.7 
         ).setScrollFactor(0);
 
         // "Game Over" text
         const gameOverText = this.scene.add.text(
-            this.scene.game.config.width / 2, 
-            this.scene.game.config.height / 2 - 50, 
+            gameoverw,
+            gameoverh - 50,
             'Game Over', 
             {
                 fontSize: '40px',
@@ -71,9 +74,9 @@ class Lava {
 
         // Retry button
         const retryButton = this.scene.add.text(
-            this.scene.game.config.width / 2, 
-            this.scene.game.config.height / 2 + 50, 
-            'Retry', 
+            gameoverw,
+            gameoverh + 50,
+            'Retry',
             {
                 fontSize: '30px',
                 fill: '#00ff00',
@@ -85,9 +88,5 @@ class Lava {
         retryButton.on('pointerdown', () => {
             this.scene.restartGame();
         });
-    }
-
-    stopLava() {
-        this.lavaRiseSpeed = 0;  // Stop the lava from rising
     }
 }
