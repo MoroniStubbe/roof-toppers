@@ -9,10 +9,10 @@ class Lava {
     createLava() {
         // Create the lava rectangle
         this.lava = this.scene.add.tileSprite(
-            0, 
-            this.scene.game.config.height, 
-            this.scene.game.config.width, 
-            -9999, 
+            0,
+            this.scene.game.config.height,
+            this.scene.game.config.width,
+            -9999,
             'lava_image'
         ).setOrigin(0, 1);
 
@@ -39,7 +39,7 @@ class Lava {
         this.gameOver = true;
 
         // Tint player red and stop movement
-        this.scene.player.sprite.setTint(0xff0000); 
+        this.scene.player.sprite.setTint(0xff0000);
         this.scene.player.sprite.setVelocity(0, 0);
 
         // Create the "Game Over" screen
@@ -51,20 +51,31 @@ class Lava {
         const gameoverh = this.scene.camera.camera.centerY;
 
         // Dark transparent overlay
+        const width = this.scene.game.config.width / 2;
+        const height = this.scene.camera.camera.y_value + 540;
+        console.log(height);
+        let height_offset = 0;
+        if (height !== 540) {
+            height_offset = 540;
+        }
+        console.log(this.scene.camera.camera.centerY);
+        console.log(this.scene.camera.camera.y);
+        console.log(this.scene.camera.camera.y_value);
+
         const overlay = this.scene.add.rectangle(
-            gameoverw,
-            gameoverh,
+            width,
+            height + height_offset,
             this.scene.game.config.width,
             this.scene.game.config.height,
-            0x000000, 
-            0.7 
+            0x000000,
+            0.7
         ).setScrollFactor(0);
 
         // "Game Over" text
         const gameOverText = this.scene.add.text(
-            gameoverw,
-            gameoverh - 50,
-            'Game Over', 
+            width,
+            height - 50,
+            'Game Over',
             {
                 fontSize: '40px',
                 fill: '#ffffff',
@@ -74,8 +85,8 @@ class Lava {
 
         // Retry button
         const retryButton = this.scene.add.text(
-            gameoverw,
-            gameoverh + 50,
+            width,
+            height + 50,
             'Retry',
             {
                 fontSize: '30px',
