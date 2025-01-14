@@ -13,6 +13,7 @@
     <script src="../resources/js/classes/Platform.js"></script>
     <script src="../resources/js/classes/GroundFloor.js"></script>
     <script src="../resources/js/classes/Wall.js"></script>
+    <script src="../resources/js/classes/Lava.js"></script>
     <script src="../resources/js/classes/Finish.js"></script>
     <script src="../resources/js/classes/RoofToppers.js"></script>
     <script src="../resources/js/classes/StartScreen.js"></script>
