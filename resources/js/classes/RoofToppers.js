@@ -80,6 +80,10 @@ class RoofToppers extends Phaser.Scene {
     }
 
     update() {
+        if (this.lava.gameOver) {
+            return;
+        }
+
         // Update player and camera
         this.player.update();
         this.camera.update();
