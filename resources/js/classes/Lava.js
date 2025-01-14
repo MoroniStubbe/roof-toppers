@@ -53,14 +53,11 @@ class Lava {
         // Dark transparent overlay
         const width = this.scene.game.config.width / 2;
         const height = this.scene.camera.camera.y_value + 540;
-        console.log(height);
         let height_offset = 0;
+
         if (height !== 540) {
             height_offset = 540;
         }
-        console.log(this.scene.camera.camera.centerY);
-        console.log(this.scene.camera.camera.y);
-        console.log(this.scene.camera.camera.y_value);
 
         const overlay = this.scene.add.rectangle(
             width,
