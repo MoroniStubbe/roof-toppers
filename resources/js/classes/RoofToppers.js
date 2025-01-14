@@ -42,7 +42,7 @@ class RoofToppers extends Phaser.Scene {
     }
 
     getElapsedTime() {
-        return Math.floor((this.time.now - this.startTime) / 1000);
+        return (this.time.now - this.startTime) / 1000; // In seconden
     }
 
     create() {
@@ -80,6 +80,17 @@ class RoofToppers extends Phaser.Scene {
     update() {
         this.player.update();
         this.camera.update();
-        this.timerText.setText('Time: ' + this.getElapsedTime());
+
+        
+        let elapsedTime = this.getElapsedTime();
+        let minutes = Math.floor(elapsedTime / 60);
+        let seconds = Math.floor(elapsedTime % 60);
+        let milliseconds = Math.floor((elapsedTime - Math.floor(elapsedTime)) * 1000);
+
+        
+        let formattedTime = `${minutes}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
+
+        
+        this.timerText.setText('Time: ' + formattedTime);
     }
 }
