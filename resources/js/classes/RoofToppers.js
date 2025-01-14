@@ -16,7 +16,8 @@ class RoofToppers extends Phaser.Scene {
         this.load.image('lava_image', URL + 'img/lava.jpg');
     }
 
-    init() {
+    init(gamemode) {
+        this.gamemode = gamemode;
         this.startTime = this.time.now;
     }
 
@@ -76,11 +77,13 @@ class RoofToppers extends Phaser.Scene {
         }).setScrollFactor(0); // Keep text fixed on the screen
 
         // Initialize the Lava object
-        this.lava = new Lava(this);
+        if (this.gamemode === "lava") {
+            this.lava = new Lava(this);
+        }
     }
 
     update() {
-        if (this.lava.gameOver) {
+        if (this.gamemode === "lava" && this.lava.gameOver) {
             return;
         }
 
@@ -90,7 +93,9 @@ class RoofToppers extends Phaser.Scene {
         this.timerText.setText('Time: ' + this.getElapsedTime());
 
         // Update lava
-        this.lava.update();
+        if (this.gamemode === "lava") {
+            this.lava.update();
+        }
     }
 
     // Restart the game by reloading the current scene
