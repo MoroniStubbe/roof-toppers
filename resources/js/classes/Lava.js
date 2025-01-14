@@ -93,5 +93,22 @@ class Lava {
         retryButton.on('pointerdown', () => {
             this.scene.restartGame();
         });
+
+        const returnHomeButton = this.scene.add.text(
+            width,
+            height + 150,
+            'Return Home',
+            {
+                fontSize: '30px',
+                fill: '#00ff00',
+                border: '1px #fff',
+                fontStyle: 'bold',
+            }
+        ).setOrigin(0.5).setInteractive();
+
+        returnHomeButton.on('pointerdown', () => {
+           this.scene.scene.start('StartScreen');
+        });
+
     }
 }
