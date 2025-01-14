@@ -38,7 +38,7 @@ class StartScreen extends Phaser.Scene {
     }
 
     showScoreboard() {
-        window.location.href = "../public/scoreboard";
+        window.location.href = "../public/scores";
     }
 
     exitGame() {
