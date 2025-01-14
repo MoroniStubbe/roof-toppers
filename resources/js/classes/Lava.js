@@ -47,9 +47,6 @@ class Lava {
     }
 
     createGameOverScreen() {
-        const gameoverw = this.scene.game.config.width / 2;
-        const gameoverh = this.scene.camera.camera.centerY;
-
         // Dark transparent overlay
         const width = this.scene.game.config.width / 2;
         const height = this.scene.camera.camera.y_value + 540;
