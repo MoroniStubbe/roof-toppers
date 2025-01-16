@@ -19,4 +19,4 @@ const BIGWALLS_CONFIG = [
     { x: 750, y: -50 },
 ];
 
-const GROUNDFLOOR_CONFIG = { x: 0, y: 1069 };
+const GROUNDFLOOR_CONFIG = { x: 0, y: 1024 };
