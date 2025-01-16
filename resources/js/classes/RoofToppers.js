@@ -83,7 +83,7 @@ class RoofToppers extends Phaser.Scene {
         this.create_bigwalls();
         this.finish = new Finish(this, 200, 200);
 
-        this.player = new Character(this, 100, 1000, 'player', 64, 64);
+        this.player = new Character(this, 100, 969, 'player', 64, 64);
 
         this.camera = new CustomCamera(this);
 
@@ -146,7 +146,7 @@ class RoofToppers extends Phaser.Scene {
         }
 
         // Calculate the height of the player in meters
-        const pixelsPerMeter = 70;  // 1.50 meters = 105 pixels => 105 / 1.50 = 70 pixels per meter
+        const pixelsPerMeter = 110;  // 1.50 meters = 105 pixels => 105 / 1.50 = 70 pixels per meter
         let heightInMeters = Math.floor((this.game.config.height - this.player.sprite.y) / pixelsPerMeter);
         this.heightText.setText('Height: ' + heightInMeters + 'm');
     }
