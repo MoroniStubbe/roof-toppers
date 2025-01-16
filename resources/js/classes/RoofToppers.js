@@ -44,7 +44,7 @@ class RoofToppers extends Phaser.Scene {
     }
 
     getElapsedTime() {
-        return (this.time.now - this.startTime) / 1000; // In seconden
+        return (this.time.now - this.startTime) / 1000; // Time shown in seconds
     }
 
     create() {
@@ -54,6 +54,7 @@ class RoofToppers extends Phaser.Scene {
         BACKGROUND.setDisplaySize(this.game.config.width, this.game.config.height);
 
         this.create_platforms();
+        this.platforms.add(new GroundFloor(this, GROUNDFLOOR_CONFIG.x, GROUNDFLOOR_CONFIG.y));
         this.create_walls();
         this.finish = new Finish(this, 200, 200);
 
@@ -65,13 +66,14 @@ class RoofToppers extends Phaser.Scene {
 
         // Add collision between the player and platforms
         this.physics.add.collider(this.player.sprite, this.platforms);
+        this.physics.add.collider(this.player.sprite, this.ground_floor);
         this.physics.add.collider(this.player.sprite, this.walls);
         this.physics.add.collider(this.player.sprite, this.finish, (player, platform) => {
             this.finish.handleFinish(player, platform, this);
         });
 
         // Add timer text
-        this.timerText = this.add.text(10, 10, 'Time: 0', {
+        this.timerText = this.add.text(10, 10, 'Time: 0:00.000', {
             fontSize: '20px',
             fill: '#ffffff'
         }).setScrollFactor(0); // Keep text fixed on the screen
@@ -80,34 +82,52 @@ class RoofToppers extends Phaser.Scene {
         if (this.gamemode === "lava") {
             this.lava = new Lava(this);
         }
-    }
 
-    update() {
-        if (this.gamemode === "lava" && this.lava.gameOver) {
-            return;
-        }
+        // Add height meter text
+        const heightTextX = this.game.config.width - 140;
+        this.heightText = this.add.text(heightTextX, 10, 'Height: 0m', {
+            fontSize: '20px',
+            fill: '#ffffff'
+        }).setScrollFactor(0);
 
-        // Update player and camera
-        this.player.update();
-        this.camera.update();
-        
-        let elapsedTime = this.getElapsedTime();
-        let minutes = Math.floor(elapsedTime / 60);
-        let seconds = Math.floor(elapsedTime % 60);
-        let milliseconds = Math.floor((elapsedTime - Math.floor(elapsedTime)) * 1000);
-        
-        let formattedTime = `${minutes}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
-
-        this.timerText.setText('Time: ' + formattedTime);
-
-        // Update lava
-        if (this.gamemode === "lava") {
-            this.lava.update();
-        }
+        // Save the starting position of the player
+        this.startY = this.player.sprite.y;
     }
 
     // Restart the game by reloading the current scene
     restartGame() {
         this.scene.restart(); // This will restart the current scene
+    }
+
+    update() {
+        this.player.update();
+        this.camera.update();
+
+        if (this.gamemode === "lava" && this.lava.gameOver) {
+            return;
+        }
+
+        // Calculate elapsed time in minutes, seconds, and milliseconds
+        let elapsedTime = this.getElapsedTime();
+        let minutes = Math.floor(elapsedTime / 60);
+        let seconds = Math.floor(elapsedTime % 60);
+        let milliseconds = Math.floor((elapsedTime - Math.floor(elapsedTime)) * 1000);
+        let formattedTime = `${minutes}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
+
+        // Update timer
+        this.timerText.setText('Time: ' + formattedTime);
+
+        // Update lava
+        if (this.gamemode === "lava") {
+            this.lava.update();
+
+        }
+
+
+
+        // Calculate the height of the player in meters
+        const pixelsPerMeter = 70;  // 1.50 meters = 105 pixels => 105 / 1.50 = 70 pixels per meter
+        let heightInMeters = Math.floor((this.game.config.height - this.player.sprite.y) / pixelsPerMeter);
+        this.heightText.setText('Height: ' + heightInMeters + 'm');
     }
 }
