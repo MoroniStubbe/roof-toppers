@@ -11,7 +11,7 @@ class RoofToppers extends Phaser.Scene {
         this.load.image('floor_image', URL + 'img/gray.jpg');
         this.load.image('platform_image', URL + 'img/Platform.png');
         this.load.image('wall_image', URL + 'img/jeff.jpg');
-        this.load.image('finish_image', URL + 'img/yafrietsky.png');
+        this.load.image('finish_image', URL + 'img/finish.png');
         this.load.spritesheet('player', URL + 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
         this.load.image('lava_image', URL + 'img/lava.jpg');
     }
@@ -91,12 +91,12 @@ class RoofToppers extends Phaser.Scene {
         // Update player and camera
         this.player.update();
         this.camera.update();
-        
+
         let elapsedTime = this.getElapsedTime();
         let minutes = Math.floor(elapsedTime / 60);
         let seconds = Math.floor(elapsedTime % 60);
         let milliseconds = Math.floor((elapsedTime - Math.floor(elapsedTime)) * 1000);
-        
+
         let formattedTime = `${minutes}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
 
         this.timerText.setText('Time: ' + formattedTime);
