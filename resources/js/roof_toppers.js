@@ -3,6 +3,10 @@ const CONFIG = {
     type: Phaser.AUTO,
     width: 1080,
     height: 1080,
+    fps: {
+        target: 240,
+        forceSetTimeOut: true // ensure that the game tries to cap the framerate
+    },
     scene: StartScreen,
     physics: {
         default: 'arcade',

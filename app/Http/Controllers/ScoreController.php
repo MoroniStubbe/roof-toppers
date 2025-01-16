@@ -42,12 +42,13 @@ class ScoreController extends Controller
         $timeInSeconds = $minutes * 60 + $seconds + $milliseconds / 1000; // Tijd in seconden voor sortering
     
         // Sla de score op bij de ingelogde gebruiker
-        Score::create([
+        $score = Score::create([
             'user_id' => Auth::id(),
             'time' => $formattedTime, // Opslaan als string in m:ss.sss formaat
             'time_in_seconds' => $timeInSeconds, // Opslaan als numerieke waarde voor sortering
         ]);
     
-        return redirect()->route('scores');
-    }
+        // Return a JSON response with the saved score data
+        return response()->json($score);
+    }    
 }

@@ -8,10 +8,33 @@ class Finish extends Phaser.GameObjects.TileSprite {
         scene.physics.add.existing(this, true);
     }
 
-    // Handle the finish platform logic
     handleFinish(player, platform, scene) {
-        if (player.body && platform.body && player.body.touching.down) { // Check if the player is landing on the finish
-            scene.scene.start('GameFinished', { score: scene.getElapsedTime() });
+        if (player.body && platform.body && player.body.touching.down) { // Check if player lands on the finish
+            // Get the elapsed time
+            const elapsedTime = scene.getElapsedTime();
+
+            // Send the score to the server via AJAX (using fetch)
+            fetch(window.location.origin + '/roof-toppers/public/scores', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Get CSRF token
+                },
+                body: JSON.stringify({
+                    time: elapsedTime
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Score saved:', data);
+                    // Optionally, you can show a success message to the player here
+                })
+                .catch(error => {
+                    console.error('Error saving score:', error);
+                });
+
+            // After finishing, restart the scene or do something else
+            scene.scene.start('GameFinished', { score: elapsedTime });
         }
     }
 }
