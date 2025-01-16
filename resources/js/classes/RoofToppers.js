@@ -8,7 +8,7 @@ class RoofToppers extends Phaser.Scene {
 
         // Load background, platform, player sprite, and lava texture
         this.load.image('background_image', URL + 'img/gordon.jpg');
-        this.load.image('floor_image', URL + 'img/gray.jpg');
+        this.load.image('floor_image', URL + 'img/Dungeon_Floor.png');
         this.load.image('platform_image', URL + 'img/Platform.png');
         this.load.image('wall_image', URL + 'img/wall_object.png');
         this.load.image('big_wall_image', URL + 'img/Big_wall.png');
