@@ -9,9 +9,9 @@ class RoofToppers extends Phaser.Scene {
         // Load background, platform, player sprite, and lava texture
         this.load.image('background_image', URL + 'img/gordon.jpg');
         this.load.image('floor_image', URL + 'img/gray.jpg');
-        this.load.image('platform_image', URL + 'img/gj.jpg');
+        this.load.image('platform_image', URL + 'img/Platform.png');
         this.load.image('wall_image', URL + 'img/jeff.jpg');
-        this.load.image('finish_image', URL + 'img/yafrietsky.png');
+        this.load.image('finish_image', URL + 'img/finish.png');
         this.load.spritesheet('player', URL + 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
         this.load.image('lava_image', URL + 'img/lava.jpg');
     }
@@ -47,7 +47,19 @@ class RoofToppers extends Phaser.Scene {
         return (this.time.now - this.startTime) / 1000; // Time shown in seconds
     }
 
+    getFormattedTime() {
+        let elapsedTime = this.getElapsedTime();
+        let minutes = Math.floor(elapsedTime / 60);
+        let seconds = Math.floor(elapsedTime % 60);
+        let milliseconds = Math.floor((elapsedTime - Math.floor(elapsedTime)) * 1000);
+        return `${minutes}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
+    }
+
     create() {
+        if (!this.scene.get('GameFinished')) {
+            this.scene.add('GameFinished', GameFinished);
+        }
+
         // Create background
         const BACKGROUND = this.add.image(0, 0, 'background_image');
         BACKGROUND.setOrigin(0, 0);
@@ -107,23 +119,17 @@ class RoofToppers extends Phaser.Scene {
             return;
         }
 
-        // Calculate elapsed time in minutes, seconds, and milliseconds
-        let elapsedTime = this.getElapsedTime();
-        let minutes = Math.floor(elapsedTime / 60);
-        let seconds = Math.floor(elapsedTime % 60);
-        let milliseconds = Math.floor((elapsedTime - Math.floor(elapsedTime)) * 1000);
-        let formattedTime = `${minutes}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
+        // Update player and camera
+        this.player.update();
+        this.camera.update();
 
-        // Update timer
-        this.timerText.setText('Time: ' + formattedTime);
+        this.timerText.setText('Time: ' + this.getFormattedTime());
 
         // Update lava
         if (this.gamemode === "lava") {
             this.lava.update();
 
         }
-
-
 
         // Calculate the height of the player in meters
         const pixelsPerMeter = 70;  // 1.50 meters = 105 pixels => 105 / 1.50 = 70 pixels per meter
