@@ -11,7 +11,7 @@ class RoofToppers extends Phaser.Scene {
         this.load.image('wall_image', 'img/jeff.jpg');
         this.load.image('finish_image', 'img/yafrietsky.png');
         this.load.spritesheet('player', 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
-        this.load.image('lava_image', URL + 'img/lava.jpg');
+        this.load.image('lava_image', 'img/lava.jpg');
     }
 
     init(gamemode) {
