@@ -47,6 +47,14 @@ class RoofToppers extends Phaser.Scene {
         return (this.time.now - this.startTime) / 1000; // In seconden
     }
 
+    getFormattedTime() {
+        let elapsedTime = this.getElapsedTime();
+        let minutes = Math.floor(elapsedTime / 60);
+        let seconds = Math.floor(elapsedTime % 60);
+        let milliseconds = Math.floor((elapsedTime - Math.floor(elapsedTime)) * 1000);
+        return `${minutes}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
+    }
+
     create() {
         if (!this.scene.get('GameFinished')) {
             this.scene.add('GameFinished', GameFinished);
@@ -96,14 +104,7 @@ class RoofToppers extends Phaser.Scene {
         this.player.update();
         this.camera.update();
 
-        let elapsedTime = this.getElapsedTime();
-        let minutes = Math.floor(elapsedTime / 60);
-        let seconds = Math.floor(elapsedTime % 60);
-        let milliseconds = Math.floor((elapsedTime - Math.floor(elapsedTime)) * 1000);
-
-        let formattedTime = `${minutes}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
-
-        this.timerText.setText('Time: ' + formattedTime);
+        this.timerText.setText('Time: ' + this.getFormattedTime());
 
         // Update lava
         if (this.gamemode === "lava") {
