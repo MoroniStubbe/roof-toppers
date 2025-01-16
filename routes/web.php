@@ -5,8 +5,11 @@ use App\Http\Controllers\ScoreController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('roof_toppers');
+    return view('home');
 });
+Route::get('/game', function () {
+    return view('roof_toppers');
+})->name('game');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
