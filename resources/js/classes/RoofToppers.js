@@ -10,7 +10,8 @@ class RoofToppers extends Phaser.Scene {
         this.load.image('background_image', URL + 'img/gordon.jpg');
         this.load.image('floor_image', URL + 'img/gray.jpg');
         this.load.image('platform_image', URL + 'img/Platform.png');
-        this.load.image('wall_image', URL + 'img/jeff.jpg');
+        this.load.image('wall_image', URL + 'img/wall_object.png');
+        this.load.image('big_wall_image', URL + 'img/Big_wall.png');
         this.load.image('finish_image', URL + 'img/finish.png');
         this.load.spritesheet('player', URL + 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
         this.load.image('lava_image', URL + 'img/lava.jpg');
@@ -43,6 +44,17 @@ class RoofToppers extends Phaser.Scene {
         });
     }
 
+    create_bigwalls() {
+        this.bigwalls = this.physics.add.staticGroup();
+
+        BIGWALLS_CONFIG.forEach(bigwall_data => {
+            const bigwall = this.add.existing(
+                new BigWall(this, bigwall_data.x, bigwall_data.y)
+            );
+            this.bigwalls.add(bigwall);
+        });
+    }
+
     getElapsedTime() {
         return (this.time.now - this.startTime) / 1000; // In seconden
     }
@@ -56,6 +68,7 @@ class RoofToppers extends Phaser.Scene {
         this.create_platforms();
         this.platforms.add(new GroundFloor(this, GROUNDFLOOR_CONFIG.x, GROUNDFLOOR_CONFIG.y));
         this.create_walls();
+        this.create_bigwalls();
         this.finish = new Finish(this, 200, 200);
 
         this.player = new Character(this, 100, 1000, 'player', 64, 64);
@@ -67,6 +80,7 @@ class RoofToppers extends Phaser.Scene {
         // Add collision between the player and platforms
         this.physics.add.collider(this.player.sprite, this.platforms);
         this.physics.add.collider(this.player.sprite, this.walls);
+        this.physics.add.collider(this.player.sprite, this.bigwalls);
         this.physics.add.collider(this.player.sprite, this.finish, (player, platform) => {
             this.finish.handleFinish(player, platform, this);
         });
