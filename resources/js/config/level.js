@@ -14,4 +14,9 @@ const WALLS_CONFIG = [
     { x: 750, y: 150 },
 ];
 
+const BIGWALLS_CONFIG = [
+    { x: 450, y: -50 },
+    { x: 750, y: -50 },
+];
+
 const GROUNDFLOOR_CONFIG = { x: 0, y: 1069 };
