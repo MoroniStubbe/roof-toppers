@@ -142,7 +142,6 @@ class RoofToppers extends Phaser.Scene {
         // Update lava
         if (this.gamemode === "lava") {
             this.lava.update();
-
         }
 
         // Calculate the height of the player in meters
