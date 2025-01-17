@@ -25,14 +25,12 @@ class Character {
         ];
 
         animations.forEach(anim => {
-            if (!this.sprite.anims.exists(anim.key)) {
-                scene.anims.create({
-                    key: anim.key,
-                    frames: [{ key: key, frame: anim.frame }],
-                    frameRate: 1,
-                    repeat: -1
-                });
-            }
+            scene.anims.create({
+                key: anim.key,
+                frames: [{ key: key, frame: anim.frame }],
+                frameRate: 1,
+                repeat: -1
+            });
         });
     }
 
