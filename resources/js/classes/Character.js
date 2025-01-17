@@ -6,7 +6,7 @@ class Character {
         this.sprite.setBounce(0.2);
         this.sprite.setCollideWorldBounds(true);
 
-        this.createAnimations(scene, key, frameWidth, frameHeight);
+        this.createAnimations(key, frameWidth, frameHeight);
 
         // movement keys
         this.keys = scene.input.keyboard.addKeys({
@@ -16,7 +16,7 @@ class Character {
         });
     }
 
-    createAnimations(scene, key, frameWidth, frameHeight) {
+    createAnimations(key, frameWidth, frameHeight) {
         const animations = [
             { key: 'left', frame: 1 },
             { key: 'right', frame: 0 },
@@ -25,12 +25,14 @@ class Character {
         ];
 
         animations.forEach(anim => {
-            scene.anims.create({
-                key: anim.key,
-                frames: [{ key: key, frame: anim.frame }],
-                frameRate: 1,
-                repeat: -1
-            });
+            if (!this.sprite.anims.exists(anim.key)) {
+                this.sprite.anims.create({
+                    key: anim.key,
+                    frames: [{ key: key, frame: anim.frame }],
+                    frameRate: 1,
+                    repeat: -1
+                });
+            }
         });
     }
 
