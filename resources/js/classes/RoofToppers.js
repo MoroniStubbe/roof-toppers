@@ -81,7 +81,7 @@ class RoofToppers extends Phaser.Scene {
         this.platforms.add(new GroundFloor(this, GROUNDFLOOR_CONFIG.x, GROUNDFLOOR_CONFIG.y));
         this.create_walls();
         this.create_bigwalls();
-        this.finish = new Finish(this, 200, 200);
+        this.finish = new Finish(this, 750, -200);
 
         this.player = new Character(this, 100, 969, 'player', 64, 64);
 
