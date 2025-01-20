@@ -7,6 +7,10 @@ const PLATFORMS_CONFIG = [
     { x: 600, y: 450 },
     { x: 800, y: 400 },
     { x: 900, y: 300 },
+    { x: 100, y: 100 },
+    { x: 500, y: 0 },
+    { x: -50, y: -50 },
+    { x: 200, y: -200 },
 ];
 
 const WALLS_CONFIG = [
@@ -14,4 +18,9 @@ const WALLS_CONFIG = [
     { x: 750, y: 150 },
 ];
 
-const GROUNDFLOOR_CONFIG = { x: 0, y: 1069 };
+const BIGWALLS_CONFIG = [
+    { x: 375, y: -225 },
+    // { x: 750, y: -50 },
+];
+
+const GROUNDFLOOR_CONFIG = { x: 0, y: 1024 };
