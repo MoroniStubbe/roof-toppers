@@ -1,6 +1,6 @@
 class Platform extends Phaser.GameObjects.TileSprite {
     constructor(scene, x, y) {
-        super(scene, x, y, 150, 50, 'platform_image');
+        super(scene, x, y, 174, 50, 'platform_image');
         scene.add.existing(this);
         this.setOrigin(0, 0);
         const TILE_SCALE = 1;

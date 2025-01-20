@@ -8,9 +8,10 @@ class RoofToppers extends Phaser.Scene {
 
         // Load background, platform, player sprite, and lava texture
         this.load.image('background_image', URL + 'img/gordon.jpg');
-        this.load.image('floor_image', URL + 'img/gray.jpg');
+        this.load.image('floor_image', URL + 'img/Dungeon_Floor.png');
         this.load.image('platform_image', URL + 'img/Platform.png');
-        this.load.image('wall_image', URL + 'img/jeff.jpg');
+        this.load.image('wall_image', URL + 'img/wall_object.png');
+        this.load.spritesheet('big_wall_image', URL + 'img/Big_wall.png', { frameWidth: 50, frameHeight: 150 });
         this.load.image('finish_image', URL + 'img/finish.png');
         this.load.spritesheet('player', URL + 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
         this.load.image('lava_image', URL + 'img/lava.jpg');
@@ -43,6 +44,17 @@ class RoofToppers extends Phaser.Scene {
         });
     }
 
+    create_bigwalls() {
+        this.bigwalls = this.physics.add.staticGroup();
+
+        BIGWALLS_CONFIG.forEach(bigwall_data => {
+            const bigwall = this.add.existing(
+                new BigWall(this, bigwall_data.x, bigwall_data.y)
+            );
+            this.bigwalls.add(bigwall);
+        });
+    }
+
     getElapsedTime() {
         return (this.time.now - this.startTime) / 1000; // Time shown in seconds
     }
@@ -68,9 +80,10 @@ class RoofToppers extends Phaser.Scene {
         this.create_platforms();
         this.platforms.add(new GroundFloor(this, GROUNDFLOOR_CONFIG.x, GROUNDFLOOR_CONFIG.y));
         this.create_walls();
-        this.finish = new Finish(this, 200, 200);
+        this.create_bigwalls();
+        this.finish = new Finish(this, 750, -200);
 
-        this.player = new Character(this, 100, 1000, 'player', 64, 64);
+        this.player = new Character(this, 100, 969, 'player', 64, 64);
 
         this.camera = new CustomCamera(this);
 
@@ -80,6 +93,7 @@ class RoofToppers extends Phaser.Scene {
         this.physics.add.collider(this.player.sprite, this.platforms);
         this.physics.add.collider(this.player.sprite, this.ground_floor);
         this.physics.add.collider(this.player.sprite, this.walls);
+        this.physics.add.collider(this.player.sprite, this.bigwalls);
         this.physics.add.collider(this.player.sprite, this.finish, (player, platform) => {
             this.finish.handleFinish(player, platform, this);
         });
@@ -128,11 +142,10 @@ class RoofToppers extends Phaser.Scene {
         // Update lava
         if (this.gamemode === "lava") {
             this.lava.update();
-
         }
 
         // Calculate the height of the player in meters
-        const pixelsPerMeter = 70;  // 1.50 meters = 105 pixels => 105 / 1.50 = 70 pixels per meter
+        const pixelsPerMeter = 110;  // 1.50 meters = 105 pixels => 105 / 1.50 = 70 pixels per meter
         let heightInMeters = Math.floor((this.game.config.height - this.player.sprite.y) / pixelsPerMeter);
         this.heightText.setText('Height: ' + heightInMeters + 'm');
     }
