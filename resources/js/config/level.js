@@ -9,9 +9,12 @@ const PLATFORMS_CONFIG = [
     { x: 900, y: 300 },
     { x: 100, y: 100 },
     { x: 500, y: 0 },
-    { x: -50, y: -50 },
     { x: 200, y: -200 },
 ];
+
+CUBES_CONFIG = [
+    { x: 50, y: -50 },
+]
 
 const WALLS_CONFIG = [
     { x: 450, y: 150 },
