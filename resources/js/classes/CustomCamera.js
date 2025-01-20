@@ -50,7 +50,9 @@ class CustomCamera {
 
     update() {
         // Stop camera movement if game is over
-        if (this.scene.lava.gameOver) {
+        this.gameOver = false;
+
+        if (this.scene.gamemode === "lava" && this.scene.lava?.gameOver) {
             return;
         }
 
