@@ -1,0 +1,74 @@
+body {
+  font-family: Arial, sans-serif;
+  background: rgb(21, 35, 35);
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  /* Zorgt ervoor dat de container in meerdere rijen kan breken als er weinig ruimte is */
+}
+
+.centered .box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  width: 350px;
+  min-height: 400px;
+  /* Zorgt ervoor dat de box altijd minimaal 400px hoog is */
+}
+
+.box {
+  background: rgb(63, 59, 59);
+  border-radius: 50px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 350px;
+  min-height: 400px;
+  /* Zorg ervoor dat de box minimaal 400px hoog is, maar kan groter worden */
+  position: relative;
+}
+.box h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #201e1e;
+}
+.box ul {
+  list-style: none;
+  padding: 0;
+  font-size: 1.5rem;
+  color: #201e1e;
+  flex-grow: 1;
+  overflow-y: auto;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.box li {
+  padding: 10px 0;
+  font-weight: bold;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #201e1e;
+}
+.box li:last-child {
+  border-bottom: 1px solid #201e1e;
+}/*# sourceMappingURL=scoreboard.css.map */
