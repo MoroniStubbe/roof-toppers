@@ -8,7 +8,9 @@ class RoofToppers extends Phaser.Scene {
         this.load.image('background_image', 'img/gordon.jpg');
         this.load.image('floor_image', 'img/gray.jpg');
         this.load.image('platform_image', 'img/gj.jpg');
+        this.load.image('cube_image', 'img/CubeTile.png');
         this.load.image('wall_image', 'img/jeff.jpg');
+        this.load.spritesheet('glow_wall_image', 'img/Glow_wall.png', { frameWidth: 50, frameHeight: 150 });
         this.load.spritesheet('big_wall_image', 'img/Big_wall.png', { frameWidth: 50, frameHeight: 150 });
         this.load.image('finish_image', 'img/yafrietsky.png');
         this.load.spritesheet('player', 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
@@ -28,6 +30,17 @@ class RoofToppers extends Phaser.Scene {
                 new Platform(this, platform_data.x, platform_data.y)
             );
             this.platforms.add(platform);
+        });
+    }
+
+    create_cubes() {
+        this.cubes = this.physics.add.staticGroup();
+
+        CUBES_CONFIG.forEach(cube_data => {
+            const cube = this.add.existing(
+                new CubeTile(this, cube_data.x, cube_data.y)
+            );
+            this.cubes.add(cube);
         });
     }
 
@@ -76,6 +89,7 @@ class RoofToppers extends Phaser.Scene {
         BACKGROUND.setDisplaySize(this.game.config.width, this.game.config.height);
 
         this.create_platforms();
+        this.create_cubes();
         this.platforms.add(new GroundFloor(this, GROUNDFLOOR_CONFIG.x, GROUNDFLOOR_CONFIG.y));
         this.create_walls();
         this.create_bigwalls();
@@ -89,6 +103,7 @@ class RoofToppers extends Phaser.Scene {
 
         // Add collision between the player and platforms
         this.physics.add.collider(this.player.sprite, this.platforms);
+        this.physics.add.collider(this.player.sprite, this.cubes);
         this.physics.add.collider(this.player.sprite, this.ground_floor);
         this.physics.add.collider(this.player.sprite, this.walls);
         this.physics.add.collider(this.player.sprite, this.bigwalls);
@@ -127,7 +142,7 @@ class RoofToppers extends Phaser.Scene {
         this.player.update();
         this.camera.update();
 
-        if (this.gamemode === "lava" && this.lava.gameOver) {
+        if (this.gamemode === "lava" && this.lava?.gameOver) {
             return;
         }
 
