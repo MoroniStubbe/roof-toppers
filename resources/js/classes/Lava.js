@@ -41,6 +41,7 @@ class Lava {
         // Tint player red and stop movement
         this.scene.player.sprite.setTint(0xff0000);
         this.scene.player.stopMovement(); // Call the new function to stop movement
+        this.scene.camera.stopFollow();
     
         // Create the "Game Over" screen
         this.createGameOverScreen();

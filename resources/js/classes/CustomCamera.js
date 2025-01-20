@@ -16,9 +16,15 @@ class CustomCamera {
         this.cameraMoving = true;
 
         if (floor === 1) {
-            this.camera.pan(this.camera.centerX, 540, this.cameraSpeed, 'Linear', false, () => this.onPanComplete(floor));
-        }
-        else {
+            this.camera.pan(
+                this.camera.centerX,
+                540,
+                this.cameraSpeed,
+                'Linear',
+                false,
+                () => this.onPanComplete(floor)
+            );
+        } else {
             this.moveToFloor(floor);
         }
     }
@@ -32,10 +38,22 @@ class CustomCamera {
     }
 
     moveToFloor(floor) {
-        this.camera.pan(this.camera.centerX, this.scene.game.config.height / 2 + 540 * floor - 400, this.cameraSpeed, 'Linear', false, () => this.onPanComplete(floor));
+        this.camera.pan(
+            this.camera.centerX,
+            this.scene.game.config.height / 2 + 540 * floor - 400,
+            this.cameraSpeed,
+            'Linear',
+            false,
+            () => this.onPanComplete(floor)
+        );
     }
 
     update() {
+        // Stop camera movement if game is over
+        if (this.scene.lava.gameOver) {
+            return;
+        }
+
         if (!this.cameraMoving && this.scene.player.sprite.body.blocked.down) {
             const floor = this.getFloor();
 
@@ -43,5 +61,14 @@ class CustomCamera {
                 this.onFloorChange(floor);
             }
         }
+    }
+
+    stopFollow() {
+        this.cameraMoving = false;
+        this.floor = 1;
+        
+        this.camera.stopFollow(); 
+    
+        this.camera.setScroll(this.camera.scrollX, this.camera.scrollY);
     }
 }
