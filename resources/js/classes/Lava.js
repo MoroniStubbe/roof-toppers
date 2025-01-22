@@ -37,29 +37,24 @@ class Lava {
     handleLavaCollision() {
         // Handle player death when touching lava
         this.gameOver = true;
-    
+
         // Tint player red and stop movement
         this.scene.player.sprite.setTint(0xff0000);
         this.scene.player.stopMovement(); // Call the new function to stop movement
         this.scene.camera.stopFollow();
-    
+
         // Create the "Game Over" screen
         this.createGameOverScreen();
     }
 
     createGameOverScreen() {
         const width = this.scene.game.config.width / 2;
-        const height = this.scene.camera.camera.y_value + 540;
-        let height_offset = 0;
+        const height = this.scene.game.config.height / 2;
 
-        if (height !== 540) {
-            height_offset = 540;
-        }
-        
         // Dark transparent overlay
         const overlay = this.scene.add.rectangle(
             width,
-            height + height_offset,
+            height,
             this.scene.game.config.width,
             this.scene.game.config.height,
             0x000000,
@@ -76,7 +71,7 @@ class Lava {
                 fill: '#ffffff',
                 fontStyle: 'bold',
             }
-        ).setOrigin(0.5);
+        ).setOrigin(0.5).setScrollFactor(0);
 
         // Retry button
         const retryButton = this.scene.add.text(
@@ -88,7 +83,7 @@ class Lava {
                 fill: '#00ff00',
                 fontStyle: 'bold',
             }
-        ).setOrigin(0.5).setInteractive();
+        ).setOrigin(0.5).setScrollFactor(0).setInteractive();
 
         // Retry button click event
         retryButton.on('pointerdown', () => {
@@ -105,10 +100,10 @@ class Lava {
                 border: '1px #fff',
                 fontStyle: 'bold',
             }
-        ).setOrigin(0.5).setInteractive();
+        ).setOrigin(0.5).setScrollFactor(0).setInteractive();
 
         returnHomeButton.on('pointerdown', () => {
-           this.scene.scene.start('StartScreen');
+            this.scene.scene.start('StartScreen');
         });
 
     }
