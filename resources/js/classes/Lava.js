@@ -50,18 +50,18 @@ class Lava {
     createGameOverScreen() {
         const width = this.scene.game.config.width / 2;
         const height = this.scene.camera.camera.y_value + 540;
-        // let height_offset = 0;
+        let height_offset = 0;
 
-        // if (height !== 540) {
-        //     height_offset = 540;
-        // }
+        if (height !== 540) {
+            height_offset = 540;
+        }
         
         // Dark transparent overlay
         const overlay = this.scene.add.rectangle(
             width,
-            height,
+            height + height_offset,
             this.scene.game.config.width,
-            this.scene.game.config.height * 16,
+            this.scene.game.config.height,
             0x000000,
             0.7
         ).setScrollFactor(0);
@@ -102,6 +102,7 @@ class Lava {
             {
                 fontSize: '30px',
                 fill: '#00ff00',
+                border: '1px #fff',
                 fontStyle: 'bold',
             }
         ).setOrigin(0.5).setInteractive();
