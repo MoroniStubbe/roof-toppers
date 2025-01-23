@@ -21,14 +21,6 @@ class Finish extends Phaser.GameObjects.TileSprite {
                     time: scene.getElapsedTime()
                 })
             })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Score saved:', data);
-                    // Optionally, you can show a success message to the player here
-                })
-                .catch(error => {
-                    console.error('Error saving score:', error);
-                });
 
             // After finishing, restart the scene or do something else
             scene.scene.start('GameFinished', { score: scene.getFormattedTime() });
