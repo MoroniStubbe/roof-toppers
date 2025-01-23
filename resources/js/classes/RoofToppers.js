@@ -34,6 +34,15 @@ class RoofToppers extends Phaser.Scene {
         });
     }
 
+    create_clouds() {
+        this.clouds = this.physics.add.group({ allowGravity: false, immovable: true });
+    
+        CLOUDS_CONFIG.forEach(cloud_data => {
+            const cloud = new Cloud(this, cloud_data.x, cloud_data.y, this.player.sprite);
+            this.clouds.add(cloud);
+        });
+    }    
+
     create_cubes() {
         this.cubes = this.physics.add.staticGroup();
 
@@ -106,13 +115,17 @@ class RoofToppers extends Phaser.Scene {
 
         // Add collision between the player and platforms
         this.physics.add.collider(this.player.sprite, this.platforms);
+        this.physics.add.collider(this.player.sprite, this.clouds);
         this.physics.add.collider(this.player.sprite, this.cubes);
-        this.physics.add.collider(this.player.sprite, this.floor);
         this.physics.add.collider(this.player.sprite, this.walls);
         this.physics.add.collider(this.player.sprite, this.bigwalls);
+        this.physics.add.collider(this.player.sprite, this.floor);
         this.physics.add.collider(this.player.sprite, this.finish, (player, platform) => {
             this.finish.handleFinish(player, platform, this);
         });
+        this.physics.add.collider(this.player.sprite, this.clouds, (player, cloud) => {
+            cloud.handlePlayerOnPlatform(player);
+        });        
 
         // Add timer text
         this.timerText = this.add.text(10, 10, 'Time: 0:00.000', {
@@ -164,5 +177,6 @@ class RoofToppers extends Phaser.Scene {
         const pixelsPerMeter = 110;  // 1.50 meters = 105 pixels => 105 / 1.50 = 70 pixels per meter
         let heightInMeters = Math.floor((this.game.config.height - this.player.sprite.y) / pixelsPerMeter);
         this.heightText.setText('Height: ' + heightInMeters + 'm');
+
     }
 }
