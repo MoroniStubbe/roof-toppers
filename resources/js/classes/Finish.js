@@ -10,17 +10,19 @@ class Finish extends Phaser.GameObjects.TileSprite {
 
     handleFinish(player, platform, scene) {
         if (player.body && platform.body && player.body.touching.down) { // Check if player lands on the finish
-            // Send the score to the server via AJAX (using fetch)
-            fetch(window.location.origin + '/roof-toppers/public/scores', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Get CSRF token
-                },
-                body: JSON.stringify({
-                    time: scene.getElapsedTime()
+            if (GLOBALS.user.isLoggedIn) {
+                // Send the score to the server via AJAX (using fetch)
+                fetch(window.location.origin + '/roof-toppers/public/scores', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Get CSRF token
+                    },
+                    body: JSON.stringify({
+                        time: scene.getElapsedTime()
+                    })
                 })
-            })
+            }
 
             // After finishing, restart the scene or do something else
             scene.scene.start('GameFinished', { score: scene.getFormattedTime() });
