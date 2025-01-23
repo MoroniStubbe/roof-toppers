@@ -14,8 +14,8 @@ class RoofToppers extends Phaser.Scene {
         this.load.image('wall_image', URL + 'img/wall_object.png');
         this.load.spritesheet('glow_wall_image', URL + 'img/Glow_wall.png', { frameWidth: 50, frameHeight: 150 });
         this.load.image('finish_image', URL + 'img/finish.png');
-        this.load.spritesheet('player', URL + 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
         this.load.image('lava_image', URL + 'img/lava.jpg');
+        this.load.spritesheet('player', URL + 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
     }
 
     init(gamemode) {
@@ -100,6 +100,10 @@ class RoofToppers extends Phaser.Scene {
 
         this.player = new Character(this, 100, 969, 'player', 64, 64);
 
+        this.camera = new CustomCamera(this);
+
+        this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height, true, true, false, true);
+
         // objects
         this.create_platforms();
         this.create_clouds();
@@ -109,11 +113,7 @@ class RoofToppers extends Phaser.Scene {
         this.floor = new GroundFloor(this, 0, 1024);
         this.finish = new Finish(this, 750, -200);
 
-        this.camera = new CustomCamera(this);
-
-        this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height, true, true, false, true);
-
-        // Add collision between the player and platforms
+        // Adds collision between the player and objects
         this.physics.add.collider(this.player.sprite, this.platforms);
         this.physics.add.collider(this.player.sprite, this.clouds);
         this.physics.add.collider(this.player.sprite, this.cubes);
@@ -127,7 +127,7 @@ class RoofToppers extends Phaser.Scene {
             cloud.handlePlayerOnPlatform(player);
         });        
 
-        // Add timer text
+        // Add timer
         this.timerText = this.add.text(10, 10, 'Time: 0:00.000', {
             fontSize: '20px',
             fill: '#ffffff'
