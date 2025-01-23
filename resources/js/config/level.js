@@ -25,5 +25,3 @@ const BIGWALLS_CONFIG = [
     { x: 375, y: -225 },
     // { x: 750, y: -50 },
 ];
-
-const GROUNDFLOOR_CONFIG = { x: 0, y: 1024 };
