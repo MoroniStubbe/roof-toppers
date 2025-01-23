@@ -89,14 +89,16 @@ class RoofToppers extends Phaser.Scene {
         BACKGROUND.setOrigin(0, 0);
         BACKGROUND.setDisplaySize(this.game.config.width, this.game.config.height);
 
+        this.player = new Character(this, 100, 969, 'player', 64, 64);
+
+        // objects
         this.create_platforms();
+        this.create_clouds();
         this.create_cubes();
-        this.floor = new GroundFloor(this, 0, 1024);
         this.create_walls();
         this.create_bigwalls();
+        this.floor = new GroundFloor(this, 0, 1024);
         this.finish = new Finish(this, 750, -200);
-
-        this.player = new Character(this, 100, 969, 'player', 64, 64);
 
         this.camera = new CustomCamera(this);
 
