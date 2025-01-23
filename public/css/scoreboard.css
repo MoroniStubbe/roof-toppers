@@ -1,8 +1,8 @@
 body {
   font-family: Arial, sans-serif;
-  background: rgb(21, 35, 35);
+  background: url("/roof-toppers/public/img/rooftoppers_bg.png") no-repeat center center fixed;
+  background-size: cover;
   margin: 0;
-  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
