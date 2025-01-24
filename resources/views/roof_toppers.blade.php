@@ -10,11 +10,14 @@
     <link rel="stylesheet" href="{{ asset('/css/roof_toppers.css') }}">
     <script src="../node_modules/phaser/dist/phaser.js"></script>
     <script src="../resources/js/config/level.js"></script>
-    <script src="../resources/js/classes/Platform.js"></script>
-    <script src="../resources/js/classes/GroundFloor.js"></script>
-    <script src="../resources/js/classes/Wall.js"></script>
-    <script src="../resources/js/classes/Lava.js"></script>
-    <script src="../resources/js/classes/Finish.js"></script>
+    <script src="../resources/js/classes/objects/Platform.js"></script>
+    <script src="../resources/js/classes/objects/Cloud.js"></script>
+    <script src="../resources/js/classes/objects/Cube.js"></script>
+    <script src="../resources/js/classes/objects/Floor.js"></script>
+    <script src="../resources/js/classes/objects/Wall.js"></script>
+    <script src="../resources/js/classes/objects/BigWall.js"></script>
+    <script src="../resources/js/classes/objects/Lava.js"></script>
+    <script src="../resources/js/classes/objects/Finish.js"></script>
     <script src="../resources/js/classes/RoofToppers.js"></script>
     <script src="../resources/js/classes/StartScreen.js"></script>
     <script src="../resources/js/classes/GameFinished.js"></script>

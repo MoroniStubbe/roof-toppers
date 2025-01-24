@@ -12,9 +12,13 @@ const PLATFORMS_CONFIG = [
     { x: 200, y: -200 },
 ];
 
-CUBES_CONFIG = [
+const CLOUDS_CONFIG = [
+    { x: 200, y: 950 },
+];
+
+const CUBES_CONFIG = [
     { x: 50, y: -50 },
-]
+];
 
 const WALLS_CONFIG = [
     { x: 450, y: 150 },
@@ -25,5 +29,3 @@ const BIGWALLS_CONFIG = [
     { x: 375, y: -225 },
     // { x: 750, y: -50 },
 ];
-
-const GROUNDFLOOR_CONFIG = { x: 0, y: 1024 };
