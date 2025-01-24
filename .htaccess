@@ -1,0 +1,3 @@
+<FilesMatch "^(artisan|composer\.json|composer\.lock|package-lock\.json|package\.json|phpunit\.xml|postcss\.config.js|tailwind\.config\.js|vite\.config\.js)$">
+    Require all denied
+</FilesMatch>
