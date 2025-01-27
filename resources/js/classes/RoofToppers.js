@@ -4,18 +4,16 @@ class RoofToppers extends Phaser.Scene {
     }
 
     preload() {
-        const URL = window.location.href;
-
         // Load background, platform, player sprite, and lava texture
-        this.load.image('background_image', URL + 'img/gordon.jpg');
-        this.load.image('floor_image', URL + 'img/Dungeon_Floor.png');
-        this.load.image('platform_image', URL + 'img/Platform.png');
-        this.load.image('cube_image', URL + 'img/CubeTile.png');
-        this.load.image('wall_image', URL + 'img/wall_object.png');
-        this.load.spritesheet('glow_wall_image', URL + 'img/Glow_wall.png', { frameWidth: 50, frameHeight: 150 });
-        this.load.image('finish_image', URL + 'img/finish.png');
-        this.load.image('lava_image', URL + 'img/lava.jpg');
-        this.load.spritesheet('player', URL + 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
+        this.load.image('background_image', 'img/gordon.jpg');
+        this.load.image('floor_image', 'img/Dungeon_Floor.png');
+        this.load.image('platform_image', 'img/Platform.png');
+        this.load.image('cube_image', 'img/CubeTile.png');
+        this.load.image('wall_image', 'img/wall_object.png');
+        this.load.spritesheet('glow_wall_image', 'img/Glow_wall.png', { frameWidth: 50, frameHeight: 150 });
+        this.load.image('finish_image', 'img/finish.png');
+        this.load.image('lava_image', 'img/lava.jpg');
+        this.load.spritesheet('player', 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
     }
 
     init(gamemode) {
@@ -36,12 +34,12 @@ class RoofToppers extends Phaser.Scene {
 
     create_clouds() {
         this.clouds = this.physics.add.group({ allowGravity: false, immovable: true });
-    
+
         CLOUDS_CONFIG.forEach(cloud_data => {
             const cloud = new Cloud(this, cloud_data.x, cloud_data.y, this.player.sprite);
             this.clouds.add(cloud);
         });
-    }    
+    }
 
     create_cubes() {
         this.cubes = this.physics.add.staticGroup();
@@ -125,7 +123,7 @@ class RoofToppers extends Phaser.Scene {
         });
         this.physics.add.collider(this.player.sprite, this.clouds, (player, cloud) => {
             cloud.handlePlayerOnPlatform(player);
-        });        
+        });
 
         // Add timer
         this.timerText = this.add.text(10, 10, 'Time: 0:00.000', {

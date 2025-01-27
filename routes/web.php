@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScoreController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/game', function () {
     return view('roof_toppers');
 });
 
@@ -21,4 +21,4 @@ Route::middleware('auth')->group(function () {
 Route::get('/scores', [ScoreController::class, 'showScores'])->middleware('auth')->name('scores');
 Route::post('/scores', [ScoreController::class, 'saveScore'])->middleware('auth');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
