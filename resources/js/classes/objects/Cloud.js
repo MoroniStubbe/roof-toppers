@@ -1,6 +1,6 @@
 class Cloud extends Phaser.GameObjects.TileSprite {
     constructor(scene, x, y, player) { // Accept player as a parameter
-        super(scene, x, y, 174, 50, 'platform_image');
+        super(scene, x, y, 175, 50, 'cloud_image');
 
         scene.add.existing(this);
         this.setOrigin(0, 0);
