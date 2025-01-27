@@ -4,18 +4,17 @@ class RoofToppers extends Phaser.Scene {
     }
 
     preload() {
-        const URL = window.location.href;
-
-        // Load background, platform, player sprite, and lava texture
-        this.load.image('background_image', URL + 'img/gordon.jpg');
-        this.load.image('floor_image', URL + 'img/Dungeon_Floor.png');
-        this.load.image('platform_image', URL + 'img/Platform.png');
-        this.load.image('cube_image', URL + 'img/CubeTile.png');
-        this.load.image('wall_image', URL + 'img/wall_object.png');
-        this.load.spritesheet('glow_wall_image', URL + 'img/Glow_wall.png', { frameWidth: 50, frameHeight: 150 });
-        this.load.image('finish_image', URL + 'img/finish.png');
-        this.load.image('lava_image', URL + 'img/lava.jpg');
-        this.load.spritesheet('player', URL + 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
+        // Load background, platform, and player sprite
+        this.load.image('background_image', 'img/gordon.jpg');
+        this.load.image('floor_image', 'img/gray.jpg');
+        this.load.image('platform_image', 'img/gj.jpg');
+        this.load.image('cube_image', 'img/CubeTile.png');
+        this.load.image('wall_image', 'img/jeff.jpg');
+        this.load.spritesheet('glow_wall_image', 'img/Glow_wall.png', { frameWidth: 50, frameHeight: 150 });
+        this.load.spritesheet('big_wall_image', 'img/Big_wall.png', { frameWidth: 50, frameHeight: 150 });
+        this.load.image('finish_image', 'img/yafrietsky.png');
+        this.load.spritesheet('player', 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
+        this.load.image('lava_image', 'img/lava.jpg');
     }
 
     init(gamemode) {
