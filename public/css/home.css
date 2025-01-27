@@ -1,63 +1,50 @@
 body {
-  background-color: bisque;
+  font-family: Arial, sans-serif;
+  background-image: url("../img/rooftoppers_bg.png");
+  background-size: cover;
 }
 
 h1 {
   font-size: 100px;
   text-align: center;
+  color: white;
 }
 
 .image-container {
   width: 600px;
-  /* Increased width */
   height: 400px;
-  /* Increased height */
   border-radius: 25px;
-  /* Rounded corners */
   overflow: hidden;
-  /* Ensures the image doesn't spill outside the container */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Optional: adds a shadow for effect */
   margin: 0 auto;
-  /* Centers the container horizontally */
+  margin-top: 2%;
   position: relative;
-  /* Needed for absolute positioning of the play button */
+  /* tussentijdse border */
+  border: 3px solid white;
 }
 
 .image-container img {
   width: 100%;
-  /* Ensures the image fills the container */
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  /* Ensures the image covers the area without distortion */
 }
 
-/* Play button styles */
 .play-button {
   position: absolute;
   bottom: 20px;
-  /* Position the button 20px from the bottom */
   left: 50%;
-  /* Start from the center horizontally */
   transform: translateX(-50%);
-  /* Offset to exactly center the button */
   background-color: rgba(0, 0, 0, 0.6);
-  /* Semi-transparent background */
   color: white;
   padding: 10px 20px;
-  /* Padding for button size */
   border-radius: 25px;
-  /* Rounded corners */
   font-size: 18px;
-  /* Text size */
   border: none;
   cursor: pointer;
   z-index: 1;
-  /* Ensure the button is above the image */
 }
 
 .play-button:hover {
   background-color: rgba(0, 0, 0, 0.8);
-  /* Darker on hover */
 }/*# sourceMappingURL=home.css.map */
