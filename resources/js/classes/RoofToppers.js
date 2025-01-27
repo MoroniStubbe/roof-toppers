@@ -5,15 +5,15 @@ class RoofToppers extends Phaser.Scene {
 
     preload() {
         // Load background, platform, player sprite, and lava texture
-        this.load.image('background_image', 'img/jeff.jpg');
-        this.load.image('floor_image', 'img/Dungeon_Floor.png');
-        this.load.image('platform_image', 'img/Platform.png');
-        this.load.image('cloud_image', 'img/cloud.png');
-        this.load.image('cube_image', 'img/CubeTile.png');
-        this.load.image('wall_image', 'img/wall_object.png');
-        this.load.spritesheet('glow_wall_image', 'img/Glow_wall.png', { frameWidth: 50, frameHeight: 150 });
-        this.load.image('finish_image', 'img/finish.png');
-        this.load.image('lava_image', 'img/lava.jpg');
+        this.load.image('background_image', 'img/memes/jeff.jpg');
+        this.load.image('floor_image', 'img/objects/Dungeon_Floor.png');
+        this.load.image('platform_image', 'img/objects/Platform.png');
+        this.load.image('cloud_image', 'img/objects/cloud.png');
+        this.load.image('cube_image', 'img/objects/CubeTile.png');
+        this.load.image('wall_image', 'img/objects/wall_object.png');
+        this.load.spritesheet('glow_wall_image', 'img/objects/Glow_wall.png', { frameWidth: 50, frameHeight: 150 });
+        this.load.image('finish_image', 'img/objects/finish.png');
+        this.load.image('lava_image', 'img/memes/lava.jpg');
         this.load.spritesheet('player', 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
     }
 

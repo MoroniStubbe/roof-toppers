@@ -4,7 +4,7 @@ class StartScreen extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background', 'img/yafrietsky.png');
+        this.load.image('background', 'img/memes/yafrietsky.png');
     }
 
     create() {
