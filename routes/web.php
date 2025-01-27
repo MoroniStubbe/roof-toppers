@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
 Route::get('/game', function () {
     return view('roof_toppers');
 })->name('game');
@@ -24,4 +25,4 @@ Route::middleware('auth')->group(function () {
 Route::get('/scores', [ScoreController::class, 'showScores'])->middleware('auth')->name('scores');
 Route::post('/scores', [ScoreController::class, 'saveScore'])->middleware('auth');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
