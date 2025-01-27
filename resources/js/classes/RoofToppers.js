@@ -5,7 +5,7 @@ class RoofToppers extends Phaser.Scene {
 
     preload() {
         // Load background, platform, player sprite, and lava texture
-        this.load.image('background_image', 'img/gordon.jpg');
+        this.load.image('background_image', 'img/jeff.jpg');
         this.load.image('floor_image', 'img/Dungeon_Floor.png');
         this.load.image('platform_image', 'img/Platform.png');
         this.load.image('cloud_image', 'img/cloud.png');
@@ -93,9 +93,10 @@ class RoofToppers extends Phaser.Scene {
         }
 
         // Create background
-        const BACKGROUND = this.add.image(0, 0, 'background_image');
-        BACKGROUND.setOrigin(0, 0);
-        BACKGROUND.setDisplaySize(this.game.config.width, this.game.config.height);
+        const BACKGROUND = this.add.image(0, this.game.config.height, 'background_image');
+        const scale = this.game.config.width / BACKGROUND.width;
+        BACKGROUND.setOrigin(0, 1);
+        BACKGROUND.setScale(scale);
 
         this.player = new Character(this, 100, 969, 'player', 64, 64);
 
