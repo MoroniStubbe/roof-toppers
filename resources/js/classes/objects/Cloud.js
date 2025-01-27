@@ -23,14 +23,15 @@ class Cloud extends Phaser.GameObjects.TileSprite {
     }
 
     handlePlayerOnPlatform(player) {
-        if (!this.isDisappearing) {
+        // Ensure the player is standing ON the cloud (not jumping through it)
+        if (player.body.touching.down && !this.isDisappearing) {
             this.isDisappearing = true;
     
             // Fade out over 500ms
             this.scene.tweens.add({
                 targets: this,
                 alpha: 0,
-                duration: 250, // 0.5 seconds fade-out
+                duration: 250,
                 onComplete: () => {
                     this.setVisible(false);
                     this.body.enable = false; 
@@ -53,5 +54,5 @@ class Cloud extends Phaser.GameObjects.TileSprite {
                 }
             });
         }
-    }    
+    }
 }
