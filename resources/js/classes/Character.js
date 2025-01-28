@@ -5,17 +5,20 @@ class Character {
         this.sprite.setScale(3);
         this.sprite.setBounce(0.2);
         this.sprite.setCollideWorldBounds(true);
-
+    
+        // Reduce the hitbox size by 10 pixels
+        this.sprite.body.setSize(this.sprite.width - 5, this.sprite.height - 5);
+        this.sprite.body.setOffset(5, 5);  // Adjust offset to center hitbox
+    
         this.createAnimations(key, frameWidth, frameHeight);
-
-        // Movement keys
+    
         this.keys = scene.input.keyboard.addKeys({
             left: Phaser.Input.Keyboard.KeyCodes.A,
             right: Phaser.Input.Keyboard.KeyCodes.D,
             jump: Phaser.Input.Keyboard.KeyCodes.SPACE
         });
-
-        this.gameOver = false; // Flag to check if the player is dead
+    
+        this.gameOver = false;
     }
 
     createAnimations(key, frameWidth, frameHeight) {
