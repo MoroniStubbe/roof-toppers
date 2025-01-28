@@ -75,6 +75,18 @@ class RoofToppers extends Phaser.Scene {
         });
     }
 
+    create_invisible_walls() {
+        this.invisibleWalls = this.physics.add.staticGroup();
+    
+        INVISIBLE_WALLS_CONFIG.forEach(wall_data => {
+            const invisibleWall = this.add.rectangle(wall_data.x, wall_data.y, wall_data.width, wall_data.height, 0x000000, 0);
+            this.physics.add.existing(invisibleWall, true);
+            this.invisibleWalls.add(invisibleWall);
+        });
+    
+        this.physics.add.collider(this.player.sprite, this.invisibleWalls);
+    }
+
     getElapsedTime() {
         return (this.time.now - this.startTime) / 1000; // Time shown in seconds
     }
@@ -110,6 +122,7 @@ class RoofToppers extends Phaser.Scene {
         this.create_cubes();
         this.create_walls();
         this.create_bigwalls();
+        this.create_invisible_walls();
         this.floor = new GroundFloor(this, 0, 1024);
         this.finish = new Finish(this, 750, -200);
 

@@ -28,4 +28,7 @@ const WALLS_CONFIG = [
 const BIGWALLS_CONFIG = [
     { x: 375, y: -225 },
     // { x: 750, y: -50 },
+const INVISIBLE_WALLS_CONFIG = [
+    { x: 1010, y: -1350, width: 200, height: 185 },
+    { x: 75, y: -1350, width: 200, height: 200 },
 ];
