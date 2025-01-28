@@ -124,7 +124,7 @@ class RoofToppers extends Phaser.Scene {
         this.create_bigwalls();
         this.create_invisible_walls();
         this.floor = new GroundFloor(this, 0, 1024);
-        this.finish = new Finish(this, 750, -200);
+        this.finish = new Finish(this, this.game.config.width / 2.5, -2550);
 
         // Adds collision between the player and objects
         this.physics.add.collider(this.player.sprite, this.platforms);
