@@ -113,6 +113,7 @@ class RoofToppers extends Phaser.Scene {
         this.player = new Character(this, 100, 969, 'player', 64, 64);
 
         this.camera = new CustomCamera(this);
+        this.camera.camera.setBounds(0, -2750, this.game.config.width, this.game.config.height + 2750);
 
         this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height, true, true, false, true);
 
@@ -168,8 +169,6 @@ class RoofToppers extends Phaser.Scene {
     }
 
     update() {
-        this.player.update();
-        this.camera.update();
 
         if (this.gamemode === "lava" && this.lava?.gameOver) {
             return;
