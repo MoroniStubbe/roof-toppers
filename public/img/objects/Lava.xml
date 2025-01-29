@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Lava.png">
+	<!-- Created with Adobe Animate version 22.0.5.191 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Lava_0" x="0" y="0" width="1468" height="462"/>
+	<SubTexture name="Lava_1" x="1468" y="0" width="1468" height="462"/>
+	<SubTexture name="Lava_2" x="2936" y="0" width="1468" height="462"/>
+	<SubTexture name="Lava_3" x="4404" y="0" width="1468" height="462"/>
+	<SubTexture name="Lava_4" x="5872" y="0" width="1468" height="462"/>
+	<SubTexture name="Lava_5" x="0" y="462" width="1468" height="462"/>
+	<SubTexture name="Lava_6" x="1468" y="462" width="1468" height="462"/>
+	<SubTexture name="Lava_7" x="2936" y="462" width="1468" height="462"/>
+	<SubTexture name="Lava_8" x="4404" y="462" width="1468" height="462"/>
+	<SubTexture name="Lava_9" x="5872" y="462" width="1468" height="462"/>
+	<SubTexture name="Lava_10" x="0" y="924" width="1468" height="462"/>
+	<SubTexture name="Lava_11" x="1468" y="924" width="1468" height="462"/>
+	<SubTexture name="Lava_12" x="2936" y="924" width="1468" height="462"/>
+	<SubTexture name="Lava_13" x="4404" y="924" width="1468" height="462"/>
+	<SubTexture name="Lava_14" x="5872" y="924" width="1468" height="462"/>
+	<SubTexture name="Lava_15" x="0" y="1386" width="1468" height="462"/>
+	<SubTexture name="Lava_16" x="1468" y="1386" width="1468" height="462"/>
+	<SubTexture name="Lava_17" x="2936" y="1386" width="1468" height="462"/>
+	<SubTexture name="Lava_18" x="4404" y="1386" width="1468" height="462"/>
+	<SubTexture name="Lava_19" x="5872" y="1386" width="1468" height="462"/>
+	<SubTexture name="Lava_20" x="0" y="1848" width="1468" height="462"/>
+	<SubTexture name="Lava_21" x="1468" y="1848" width="1468" height="462"/>
+	<SubTexture name="Lava_22" x="2936" y="1848" width="1468" height="462"/>
+	<SubTexture name="Lava_23" x="4404" y="1848" width="1468" height="462"/>
+	<SubTexture name="Lava_24" x="5872" y="1848" width="1468" height="462"/>
+	<SubTexture name="Lava_25" x="0" y="2310" width="1468" height="462"/>
+	<SubTexture name="Lava_26" x="1468" y="2310" width="1468" height="462"/>
+	<SubTexture name="Lava_27" x="2936" y="2310" width="1468" height="462"/>
+</TextureAtlas>
