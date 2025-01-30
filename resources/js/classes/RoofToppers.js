@@ -5,15 +5,15 @@ class RoofToppers extends Phaser.Scene {
 
     preload() {
         // Load background, platform, player sprite, and lava texture
-        this.load.image('background_image', 'img/jeff.jpg');
-        this.load.image('floor_image', 'img/Dungeon_Floor.png');
-        this.load.image('platform_image', 'img/Platform.png');
-        this.load.image('cloud_image', 'img/cloud.png');
-        this.load.image('cube_image', 'img/CubeTile.png');
-        this.load.image('wall_image', 'img/wall_object.png');
-        this.load.spritesheet('glow_wall_image', 'img/Glow_wall.png', { frameWidth: 50, frameHeight: 150 });
-        this.load.image('finish_image', 'img/finish.png');
-        this.load.image('lava_image', 'img/lava.jpg');
+        this.load.image('background_image', 'img/Rooftoppers_dungeon.png');
+        this.load.image('floor_image', 'img/objects/Dungeon_Floor.png');
+        this.load.image('platform_image', 'img/objects/Platform.png');
+        this.load.image('cloud_image', 'img/objects/cloud.png');
+        this.load.image('cube_image', 'img/objects/CubeTile.png');
+        this.load.image('wall_image', 'img/objects/wall.png');
+        this.load.spritesheet('glow_wall_image', 'img/objects/Glow_wall.png', { frameWidth: 50, frameHeight: 150 });
+        this.load.image('finish_image', 'img/objects/finish.png');
+        this.load.atlasXML('lava_animation', 'img/objects/lava.png', 'img/objects/lava.xml');
         this.load.spritesheet('player', 'img/princess.png', { frameWidth: 24, frameHeight: 35 });
     }
 
@@ -75,6 +75,18 @@ class RoofToppers extends Phaser.Scene {
         });
     }
 
+    create_invisible_walls() {
+        this.invisibleWalls = this.physics.add.staticGroup();
+    
+        INVISIBLE_WALLS_CONFIG.forEach(wall_data => {
+            const invisibleWall = this.add.rectangle(wall_data.x, wall_data.y, wall_data.width, wall_data.height, 0x000000, 0);
+            this.physics.add.existing(invisibleWall, true);
+            this.invisibleWalls.add(invisibleWall);
+        });
+    
+        this.physics.add.collider(this.player.sprite, this.invisibleWalls);
+    }
+
     getElapsedTime() {
         return (this.time.now - this.startTime) / 1000; // Time shown in seconds
     }
@@ -101,6 +113,7 @@ class RoofToppers extends Phaser.Scene {
         this.player = new Character(this, 100, 969, 'player', 64, 64);
 
         this.camera = new CustomCamera(this);
+        this.camera.camera.setBounds(0, -2750, this.game.config.width, this.game.config.height + 2750);
 
         this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height, true, true, false, true);
 
@@ -110,8 +123,9 @@ class RoofToppers extends Phaser.Scene {
         this.create_cubes();
         this.create_walls();
         this.create_bigwalls();
+        this.create_invisible_walls();
         this.floor = new GroundFloor(this, 0, 1024);
-        this.finish = new Finish(this, 750, -200);
+        this.finish = new Finish(this, this.game.config.width / 2.5, -2550);
 
         // Adds collision between the player and objects
         this.physics.add.collider(this.player.sprite, this.platforms);
@@ -155,8 +169,6 @@ class RoofToppers extends Phaser.Scene {
     }
 
     update() {
-        this.player.update();
-        this.camera.update();
 
         if (this.gamemode === "lava" && this.lava?.gameOver) {
             return;

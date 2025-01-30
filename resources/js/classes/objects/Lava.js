@@ -7,19 +7,37 @@ class Lava {
     }
 
     createLava() {
-        // Create the lava rectangle
-        this.lava = this.scene.add.tileSprite(
-            0,
-            this.scene.game.config.height,
-            this.scene.game.config.width,
-            -9999,
-            'lava_image'
-        ).setOrigin(0, 1);
+        const gameWidth = this.scene.game.config.width * 2;
 
-        // Make the lava immovable and disable gravity
+        const lavaHeight = -1080;
+        const lavaYPosition = this.scene.game.config.height;
+        
+        this.lava = this.scene.add.sprite(
+            -500, 
+            lavaYPosition, 
+            'lava_animation',  
+            'Lava_0'
+        ).setOrigin(0, 0.96).setDisplaySize(gameWidth, lavaHeight);
+        
+        // Enable physics
         this.scene.physics.add.existing(this.lava);
         this.lava.body.setImmovable(true);
         this.lava.body.setAllowGravity(false);
+    
+        // Create animation
+        this.scene.anims.create({
+            key: 'lavaPlay',
+            frames: this.scene.anims.generateFrameNames('lava_animation', {
+                start: 0,
+                end: 27,
+                prefix: 'Lava_',
+            }),
+            frameRate: 10,
+            repeat: -1
+        });
+    
+        // Play the animation
+        this.lava.play('lavaPlay');
     }
 
     update() {
