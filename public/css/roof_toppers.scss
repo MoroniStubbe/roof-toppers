@@ -1,8 +1,14 @@
 body {
     display: flex;
     justify-content: center;
+    background-image: url('../img/rooftoppers_bg.png');
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
 
     canvas {
         height: 100vh;
+        border-radius: 15px;
+        border-right: cyan 3px groove;
+        border-left: cyan 3px groove;
     }
 }
