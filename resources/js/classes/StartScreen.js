@@ -12,48 +12,54 @@ class StartScreen extends Phaser.Scene {
         BACKGROUND.setOrigin(0, 0);
         BACKGROUND.setDisplaySize(this.game.config.width, this.game.config.height);
 
-        // Create Start button
-        const startButton = this.add.text(300, 150, 'Start Game', { font: '32px Arial', fill: '#ffffff' })
-            .setInteractive()
-            .on('pointerdown', this.startGame, this);
+        // Create buttons
+        const createButton = (
+            scene, x, y,
+            text, callback,
+            mode = null) => {
 
-        // Create Scoreboard button
-        const scoreboardButton = this.add.text(300, 250, 'Scoreboard', { font: '32px Arial', fill: '#ffffff' })
-            .setInteractive()
-            .on('pointerdown', this.showScoreboard, this);
-
-        // Create Exit button
-        const exitButton = this.add.text(300, 350, 'Exit', { font: '32px Arial', fill: '#ffffff' })
-            .setInteractive()
-            .on('pointerdown', this.exitGame, this);
-
-        // Create Normal Mode button
-        this.normalModeButton = this.add.text(300, 450, 'Normal Mode', { font: '32px Arial', fill: '#ffffff' })
-            .setInteractive()
-            .on('pointerdown', () => this.selectMode('normal'), this);
-
-        // Create Lava Mode button
-        this.lavaModeButton = this.add.text(300, 550, 'Lava Mode', { font: '32px Arial', fill: '#ffffff' })
-            .setInteractive()
-            .on('pointerdown', () => this.selectMode('lava'), this);
-
+            let button = scene.add.text(
+                x, y, text,
+                { 
+                    font: '32px Arial',
+                    fill: '#ffffff',
+                 })
+                .setInteractive()
+                .on('pointerdown', () => {
+                    if (mode) scene.selectMode(mode);
+                    else callback.call(scene);
+                })
+                .on('pointerover', () => {
+                    if (scene.selectedMode !== mode) button.setStyle({ fill: '#00FF00' });
+                })
+                .on('pointerout', () => {
+                    if (scene.selectedMode !== mode) button.setStyle({ fill: '#ffffff' });
+                });
+        
+            return button;
+        };
+        
+        // Buttons locations
+        const startButton = createButton(this, 300, 150, 'Start Game', this.startGame);
+        const scoreboardButton = createButton(this, 300, 250, 'Scoreboard', this.showScoreboard);
+        const exitButton = createButton(this, 300, 350, 'Exit', this.exitGame);
+        this.normalModeButton = createButton(this, 300, 450, 'Normal Mode', this.startGame, 'normal');
+        this.lavaModeButton = createButton(this, 300, 550, 'Lava Mode', this.startGame, 'lava');
+        
         // Store the initial state (no mode selected)
         this.selectedMode = "normal";
         this.selectMode(this.selectedMode);
+        
     }
 
     selectMode(mode) {
-        this.selectedMode = mode; // Keep track of the selected mode
-
-        // Set the selected mode text color to green
-        if (mode === 'normal') {
-            this.normalModeButton.setFill('#00FF00'); // Green for Normal Mode
-            this.lavaModeButton.setFill('#ffffff'); // Reset Lava Mode text color
-        } else if (mode === 'lava') {
-            this.lavaModeButton.setFill('#00FF00'); // Green for Lava Mode
-            this.normalModeButton.setFill('#ffffff'); // Reset Normal Mode text color
-        }
+        this.selectedMode = mode;
+    
+        // Set correct color based on selection
+        this.normalModeButton.setStyle({ fill: mode === 'normal' ? '#00FF00' : '#ffffff' });
+        this.lavaModeButton.setStyle({ fill: mode === 'lava' ? '#FF9900' : '#ffffff' });
     }
+    
 
     startGame() {
         // Add and start the RoofToppers scene
