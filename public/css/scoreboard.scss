@@ -31,7 +31,7 @@ body {
 }
 
 .box {
-    background: rgb(63, 59, 59);
+    background: #525252;
     border-radius: 50px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -42,20 +42,20 @@ body {
     align-items: center;
     width: 350px;
     min-height: 400px;
-    /* Zorg ervoor dat de box minimaal 400px hoog is, maar kan groter worden */
     position: relative;
+    border: 3px solid #25d112;
 
     h2 {
         font-size: 2rem;
         margin-bottom: 20px;
-        color: #201e1e;
+        color: white;
     }
 
     ul {
         list-style: none;
         padding: 0;
         font-size: 1.5rem;
-        color: #201e1e;
+        color: white;
         flex-grow: 1;
         overflow-y: auto;
         position: relative;
@@ -72,10 +72,10 @@ body {
 
         width: 100%;
         text-align: center;
-        border-bottom: 1px solid #201e1e;
+        border-bottom: 1px solid white;
     }
 
     li:last-child {
-        border-bottom: 1px solid #201e1e;
+        border-bottom: 1px solid white;
     }
 }
