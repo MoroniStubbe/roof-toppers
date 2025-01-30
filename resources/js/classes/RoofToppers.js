@@ -179,23 +179,32 @@ class RoofToppers extends Phaser.Scene {
             cloud.handlePlayerOnPlatform(player);
         });
 
-        // Add timer
-        this.timerText = this.add.text(10, 10, 'Time: 0:00.000', {
+        const textStyle = {
             fontSize: '20px',
-            fill: '#ffffff'
-        }).setScrollFactor(0); // Keep text fixed on the screen
+            fill: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 4
+        }
+
+        // Add timer
+        this.timerText = this.add.text(
+            10, 10,
+            'Time: 0:00.000',
+            textStyle
+        ).setScrollFactor(0); // Keep text fixed on the screen
+
+        // Add height meter text
+        const heightTextX = this.game.config.width - 140;
+        this.heightText = this.add.text(
+            heightTextX, 10,
+            'Height: 0m',
+            textStyle
+        ).setScrollFactor(0);
 
         // Initialize the Lava object
         if (this.gamemode === "lava") {
             this.lava = new Lava(this);
         }
-
-        // Add height meter text
-        const heightTextX = this.game.config.width - 140;
-        this.heightText = this.add.text(heightTextX, 10, 'Height: 0m', {
-            fontSize: '20px',
-            fill: '#ffffff'
-        }).setScrollFactor(0);
 
         // Save the starting position of the player
         this.startY = this.player.sprite.y;

@@ -23,6 +23,8 @@ class StartScreen extends Phaser.Scene {
                 { 
                     font: '32px Arial',
                     fill: '#ffffff',
+                    stroke: '#000000',
+                    strokeThickness: 4
                  })
                 .setInteractive()
                 .on('pointerdown', () => {
