@@ -8,6 +8,8 @@
     <title>Scoreboard</title>
 </head>
 
+<x-nav></x-nav>
+
 <body class="@guest centered @endguest">
     <div class="container">
         <!-- All Time Best -->
@@ -70,6 +72,9 @@
         </div>
         @endauth
     </div>
+
+    <x-footer></x-footer>
+
 </body>
 
 </html>
