@@ -4,4 +4,9 @@ body {
 }
 body canvas {
   height: 100vh;
-}/*# sourceMappingURL=roof_toppers.css.map */
+  border-radius: 15px;
+  border-right: cyan 3px groove;
+  border-left: cyan 3px groove;
+}
+
+/*# sourceMappingURL=roof_toppers.css.map */

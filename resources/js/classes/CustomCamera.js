@@ -32,15 +32,23 @@ class CustomCamera {
     onPanComplete(floor) {
         this.floor = floor;
         this.cameraMoving = false;
-        if (floor !== 1) {
-            this.camera.y_value = this.scene.game.config.height / 2 + 540 * floor - 940;
-        }
+    
+        let maxCameraY = -2750 + this.scene.game.config.height / 2;
+        let newY = this.scene.game.config.height / 2 + 540 * floor - 940;
+    
+        this.camera.y_value = Math.max(newY, maxCameraY);
     }
 
     moveToFloor(floor) {
+        let heightTarget = this.scene.game.config.height / 2 + 540 * floor - 400;
+        let maxCameraY = -2750 + this.scene.game.config.height / 2;
+    
+        
+        heightTarget = Math.max(heightTarget, maxCameraY);
+    
         this.camera.pan(
             this.camera.centerX,
-            this.scene.game.config.height / 2 + 540 * floor - 400,
+            heightTarget,
             this.cameraSpeed,
             'Linear',
             false,
@@ -71,6 +79,9 @@ class CustomCamera {
         
         this.camera.stopFollow(); 
     
-        this.camera.setScroll(this.camera.scrollX, this.camera.scrollY);
+        this.camera.setScroll(
+            this.camera.scrollX,
+            this.camera.scrollY
+        );
     }
 }
