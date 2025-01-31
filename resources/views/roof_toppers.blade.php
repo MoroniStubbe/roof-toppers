@@ -24,6 +24,21 @@
     <script src="../resources/js/classes/Character.js"></script>
     <script src="../resources/js/classes/CustomCamera.js"></script>
     <script src="../resources/js/roof_toppers.js"></script>
+    <script>
+        let GLOBALS = <?php 
+            // Create the PHP array with user data
+            $userData = [
+                'user' => [
+                    'isLoggedIn' => Auth::check(),
+                    'user' => Auth::user() ? Auth::user()->only(['id', 'name', 'email']) : null, // Only include necessary fields
+                ]
+            ];
+            
+            // Output the entire array as JSON
+            echo json_encode($userData); 
+        ?>;
+    </script>
+    
 </head>
 
 <body>

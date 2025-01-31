@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/scores', [ScoreController::class, 'showScores'])->middleware('auth')->name('scores');
+Route::get('/scores', [ScoreController::class, 'showScores'])->name('scores');
 Route::post('/scores', [ScoreController::class, 'saveScore'])->middleware('auth');
 
 require __DIR__ . '/auth.php';
