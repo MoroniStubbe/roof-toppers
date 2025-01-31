@@ -4,23 +4,40 @@ class StartScreen extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background', 'img/memes/yafrietsky.png');
+        this.load.atlasXML('background_animation', 'img/rooftoppers_start.png', 'img/rooftoppers_start.xml');
     }
 
     create() {
-        const BACKGROUND = this.add.image(0, 0, 'background');
-        BACKGROUND.setOrigin(0, 0);
-        BACKGROUND.setDisplaySize(this.game.config.width, this.game.config.height);
+        // Create background animation
+        this.anims.create({
+            key: 'backgroundPlay',
+            frames: this.anims.generateFrameNames('background_animation', {
+                start: 0,
+                end: 12,
+                prefix: 'Rooftoppers_start',
+                zeroPad: 4
+            }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        // Add animated background
+        this.background = this.add.sprite(
+            0, 0,
+            'background_animation',
+            'Rooftoppers_start0000'
+        );
+        this.background.setOrigin(0, 0);
+        this.background.setDisplaySize(this.game.config.width, this.game.config.height);
+        this.background.play('backgroundPlay');
 
         // Create buttons
         const createButton = (
             scene, x, y,
             text, callback,
-            mode = null) => {
-
-            let button = scene.add.text(
-                x, y, text,
-                { 
+            mode = null
+        ) => {
+            let button = scene.add.text(x, y, text, { 
                     font: '32px Arial',
                     fill: '#ffffff',
                     stroke: '#000000',
@@ -51,20 +68,15 @@ class StartScreen extends Phaser.Scene {
         // Store the initial state (no mode selected)
         this.selectedMode = "normal";
         this.selectMode(this.selectedMode);
-        
     }
 
     selectMode(mode) {
         this.selectedMode = mode;
-    
-        // Set correct color based on selection
         this.normalModeButton.setStyle({ fill: mode === 'normal' ? '#00FF00' : '#ffffff' });
         this.lavaModeButton.setStyle({ fill: mode === 'lava' ? '#FF9900' : '#ffffff' });
     }
     
-
     startGame() {
-        // Add and start the RoofToppers scene
         if (this.scene.get('RoofToppers')) {
             this.scene.remove('RoofToppers');
         }
