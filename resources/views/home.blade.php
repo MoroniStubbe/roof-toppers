@@ -18,7 +18,7 @@
 </div>
     
 <div class="image-container">
-        <img src="{{ asset('img/princess.png') }}" alt="Roof Toppers Image">
+        <img src="{{ asset('img/home_screen.png') }}" alt="Roof Toppers Image">
         <button class="play-button" onclick="window.location.href='{{ route('game') }}';">Play</button>
     </div>
 
