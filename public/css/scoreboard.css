@@ -1,22 +1,20 @@
 body {
   font-family: Arial, sans-serif;
-  background: url("/roof-toppers/public/img/rooftoppers_bg.png") no-repeat center center fixed;
+  background-image: url("../img/rooftoppers_bg.png");
   background-size: cover;
   margin: 0;
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
-
-main {
+body main {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-grow: 1;
   width: 100%;
 }
-
-.container {
+body main .container {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
@@ -26,8 +24,7 @@ main {
   max-width: 800px;
   margin: 0 auto;
 }
-
-.box {
+body main .container .box {
   background: #525252;
   border-radius: 50px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -41,12 +38,12 @@ main {
   position: relative;
   border: 3px solid #25d112;
 }
-.box h2 {
+body main .container .box h2 {
   font-size: 2rem;
   margin-bottom: 20px;
   color: white;
 }
-.box ul {
+body main .container .box ul {
   list-style: none;
   padding: 0;
   font-size: 1.5rem;
@@ -58,13 +55,13 @@ main {
   flex-direction: column;
   align-items: center;
 }
-.box ul li {
+body main .container .box ul li {
   padding: 10px 0;
   font-weight: bold;
   text-align: center;
   width: 100%;
   border-bottom: 1px solid white;
 }
-.box ul li:last-child {
+body main .container .box ul li:last-child {
   border-bottom: 1px solid white;
 }/*# sourceMappingURL=scoreboard.css.map */
