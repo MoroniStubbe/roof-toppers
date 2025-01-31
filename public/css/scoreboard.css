@@ -4,28 +4,27 @@ body {
   background-size: cover;
   margin: 0;
   display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+main {
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  flex-grow: 1;
+  width: 100%;
 }
 
 .container {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  /* Zorgt ervoor dat de container in meerdere rijen kan breken als er weinig ruimte is */
-}
-
-.centered .box {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
-  height: 100%;
-  text-align: center;
-  width: 350px;
-  min-height: 400px;
-  /* Zorgt ervoor dat de box altijd minimaal 400px hoog is */
+  justify-content: center;
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .box {
@@ -33,7 +32,6 @@ body {
   border-radius: 50px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -55,20 +53,18 @@ body {
   color: white;
   flex-grow: 1;
   overflow-y: auto;
-  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.box li {
+.box ul li {
   padding: 10px 0;
   font-weight: bold;
-  position: relative;
-  width: 100%;
   text-align: center;
+  width: 100%;
   border-bottom: 1px solid white;
 }
-.box li:last-child {
+.box ul li:last-child {
   border-bottom: 1px solid white;
 }/*# sourceMappingURL=scoreboard.css.map */
