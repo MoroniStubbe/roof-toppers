@@ -14,7 +14,7 @@ class GameFinished extends Phaser.Scene {
 
         // Display "You made it!" message
         this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 50, 'You made it!', {
-            fontSize: '32px',
+            fontSize: '48px',
             color: '#fff',
             stroke: '#000000',
             strokeThickness: 4
