@@ -22,6 +22,7 @@ class RoofToppers extends Phaser.Scene {
         this.startTime = this.time.now;
     }
 
+    // Create objects    
     create_platforms() {
         this.platforms = this.physics.add.staticGroup();
 
@@ -79,7 +80,14 @@ class RoofToppers extends Phaser.Scene {
         this.invisibleWalls = this.physics.add.staticGroup();
     
         INVISIBLE_WALLS_CONFIG.forEach(wall_data => {
-            const invisibleWall = this.add.rectangle(wall_data.x, wall_data.y, wall_data.width, wall_data.height, 0x000000, 0);
+            const invisibleWall = this.add.rectangle(
+                wall_data.x,
+                wall_data.y,
+                wall_data.width,
+                wall_data.height,
+                0x000000,
+                0);
+
             this.physics.add.existing(invisibleWall, true);
             this.invisibleWalls.add(invisibleWall);
         });
@@ -105,19 +113,39 @@ class RoofToppers extends Phaser.Scene {
         }
 
         // Create background
-        const BACKGROUND = this.add.image(0, this.game.config.height, 'background_image');
+        const BACKGROUND = this.add.image(
+            0,
+            this.game.config.height,
+            'background_image'
+        );
         const scale = this.game.config.width / BACKGROUND.width;
         BACKGROUND.setOrigin(0, 1);
         BACKGROUND.setScale(scale);
 
-        this.player = new Character(this, 100, 969, 'player', 64, 64);
+        this.player = new Character(
+            this,
+            100,
+            969,
+            'player',
+            64,
+            64
+        );
 
         this.camera = new CustomCamera(this);
-        this.camera.camera.setBounds(0, -2750, this.game.config.width, this.game.config.height + 2750);
+        this.camera.camera.setBounds(0,
+            -2750,
+            this.game.config.width,
+            this.game.config.height + 2750);
 
-        this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height, true, true, false, true);
+        this.physics.world.setBounds(
+            0,
+            0,
+            this.game.config.width,
+            this.game.config.height,
+            true, true, false, true
+        );
 
-        // objects
+        // idetify object methods
         this.create_platforms();
         this.create_clouds();
         this.create_cubes();
@@ -128,36 +156,55 @@ class RoofToppers extends Phaser.Scene {
         this.finish = new Finish(this, this.game.config.width / 2.5, -2550);
 
         // Adds collision between the player and objects
-        this.physics.add.collider(this.player.sprite, this.platforms);
-        this.physics.add.collider(this.player.sprite, this.clouds);
-        this.physics.add.collider(this.player.sprite, this.cubes);
-        this.physics.add.collider(this.player.sprite, this.walls);
-        this.physics.add.collider(this.player.sprite, this.bigwalls);
-        this.physics.add.collider(this.player.sprite, this.floor);
-        this.physics.add.collider(this.player.sprite, this.finish, (player, platform) => {
+        [
+            this.platforms,
+            this.clouds,
+            this.cubes,
+            this.walls,
+            this.bigwalls,
+            this.floor
+        ].forEach(group => {
+            this.physics.add.collider(this.player.sprite, group);
+        });
+        
+        this.physics.add.collider(
+            this.player.sprite,
+            this.finish,
+            (player, platform) => {
             this.finish.handleFinish(player, platform, this);
         });
-        this.physics.add.collider(this.player.sprite, this.clouds, (player, cloud) => {
+        this.physics.add.collider(this.player.sprite,
+            this.clouds,
+            (player, cloud) => {
             cloud.handlePlayerOnPlatform(player);
         });
 
-        // Add timer
-        this.timerText = this.add.text(10, 10, 'Time: 0:00.000', {
+        const textStyle = {
             fontSize: '20px',
-            fill: '#ffffff'
-        }).setScrollFactor(0); // Keep text fixed on the screen
+            fill: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 4
+        }
+
+        // Add timer
+        this.timerText = this.add.text(
+            10, 10,
+            'Time: 0:00.000',
+            textStyle
+        ).setScrollFactor(0); // Keep text fixed on the screen
+
+        // Add height meter text
+        const heightTextX = this.game.config.width - 140;
+        this.heightText = this.add.text(
+            heightTextX, 10,
+            'Height: 0m',
+            textStyle
+        ).setScrollFactor(0);
 
         // Initialize the Lava object
         if (this.gamemode === "lava") {
             this.lava = new Lava(this);
         }
-
-        // Add height meter text
-        const heightTextX = this.game.config.width - 140;
-        this.heightText = this.add.text(heightTextX, 10, 'Height: 0m', {
-            fontSize: '20px',
-            fill: '#ffffff'
-        }).setScrollFactor(0);
 
         // Save the starting position of the player
         this.startY = this.player.sprite.y;
@@ -165,7 +212,7 @@ class RoofToppers extends Phaser.Scene {
 
     // Restart the game by reloading the current scene
     restartGame() {
-        this.scene.restart(); // This will restart the current scene
+        this.scene.restart();
     }
 
     update() {

@@ -79,6 +79,14 @@ class Lava {
             0.7
         ).setScrollFactor(0);
 
+        const textStyle = {
+            fontSize: '30px',
+            fill: '#00ff00',
+            fontStyle: 'bold',
+            stroke: '#000000',
+            strokeThickness: 4
+    }
+
         // "Game Over" text
         const gameOverText = this.scene.add.text(
             width,
@@ -88,6 +96,8 @@ class Lava {
                 fontSize: '40px',
                 fill: '#ffffff',
                 fontStyle: 'bold',
+                stroke: '#000000',
+                strokeThickness: 4
             }
         ).setOrigin(0.5).setScrollFactor(0);
 
@@ -96,11 +106,7 @@ class Lava {
             width,
             height + 50,
             'Retry',
-            {
-                fontSize: '30px',
-                fill: '#00ff00',
-                fontStyle: 'bold',
-            }
+            textStyle
         ).setOrigin(0.5).setScrollFactor(0).setInteractive();
 
         // Retry button click event
@@ -112,12 +118,7 @@ class Lava {
             width,
             height + 150,
             'Return Home',
-            {
-                fontSize: '30px',
-                fill: '#00ff00',
-                border: '1px #fff',
-                fontStyle: 'bold',
-            }
+            textStyle
         ).setOrigin(0.5).setScrollFactor(0).setInteractive();
 
         returnHomeButton.on('pointerdown', () => {

@@ -16,18 +16,24 @@ class GameFinished extends Phaser.Scene {
         this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 50, 'You made it!', {
             fontSize: '32px',
             color: '#fff',
+            stroke: '#000000',
+            strokeThickness: 4
         }).setOrigin(0.5);
 
         // Display the player's score
         this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, `Your score is: ${this.score}`, {
             fontSize: '24px',
             color: '#fff',
+            stroke: '#000000',
+            strokeThickness: 4,
         }).setOrigin(0.5);
 
         // Add a button to restart the game or go back to the main menu
         const restartButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 100, 'Continue', {
             fontSize: '24px',
             color: '#0f0',
+            stroke: '#000000',
+            strokeThickness: 4,
             backgroundColor: '#222',
             padding: { x: 10, y: 5 },
         }).setOrigin(0.5).setInteractive();

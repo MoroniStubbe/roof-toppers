@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="rooftoppers_start.png">
+	<!-- Created with Adobe Animate version 22.0.5.191 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Rooftoppers_start0000" x="0" y="0" width="740" height="726"/>
+	<SubTexture name="Rooftoppers_start0001" x="740" y="0" width="740" height="726"/>
+	<SubTexture name="Rooftoppers_start0002" x="1480" y="0" width="740" height="726"/>
+	<SubTexture name="Rooftoppers_start0003" x="2220" y="0" width="740" height="726"/>
+	<SubTexture name="Rooftoppers_start0004" x="2960" y="0" width="740" height="726"/>
+	<SubTexture name="Rooftoppers_start0005" x="0" y="726" width="740" height="726"/>
+	<SubTexture name="Rooftoppers_start0006" x="740" y="726" width="740" height="726"/>
+	<SubTexture name="Rooftoppers_start0007" x="1480" y="726" width="740" height="726"/>
+	<SubTexture name="Rooftoppers_start0008" x="2220" y="726" width="740" height="726"/>
+	<SubTexture name="Rooftoppers_start0009" x="2960" y="726" width="740" height="726"/>
+	<SubTexture name="Rooftoppers_start0010" x="0" y="1452" width="740" height="726"/>
+	<SubTexture name="Rooftoppers_start0011" x="740" y="1452" width="740" height="726"/>
+	<SubTexture name="Rooftoppers_start0012" x="1480" y="1452" width="740" height="726"/>
+</TextureAtlas>
