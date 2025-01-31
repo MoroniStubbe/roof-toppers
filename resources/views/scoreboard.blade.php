@@ -8,9 +8,10 @@
     <title>Scoreboard</title>
 </head>
 
-<x-nav></x-nav>
-
 <body class="@guest centered @endguest">
+
+    <x-nav></x-nav>
+
     <div class="container">
         <!-- All Time Best -->
         <div class="box">
