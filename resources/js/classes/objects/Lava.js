@@ -3,12 +3,13 @@ class Lava {
         this.scene = scene;
         this.gameOver = false;
         this.lavaRiseSpeed = 0.5;
+        this.lavaActive = false;
         this.createLava();
+        this.createCountdownTimer();
     }
 
     createLava() {
         const gameWidth = this.scene.game.config.width * 2;
-
         const lavaHeight = -1080;
         const lavaYPosition = this.scene.game.config.height;
         
@@ -40,10 +41,47 @@ class Lava {
         this.lava.play('lavaPlay');
     }
 
-    update() {
-        if (this.gameOver) return;
+    createCountdownTimer() {
+        let countdown = 0.95; 
+        const centerX = this.scene.game.config.width / 2;
+        const centerY = this.scene.game.config.height / 2;
 
-        // Slowly rise the lava
+        const textStyle = {
+            fontSize: '50px',
+            fill: '#ff0000',
+            fontStyle: 'bold',
+            stroke: '#000000',
+            strokeThickness: 8
+        };
+
+        // Create the lava timer
+        this.timerText = this.scene.add.text(
+            centerX,
+            centerY,
+            `Lava incoming in: ${countdown.toFixed(3)}`,
+            textStyle
+        ).setOrigin(0.5).setScrollFactor(0);
+
+        // Update timer every frame to show milliseconds
+        this.scene.time.addEvent({
+            delay: 10,
+            callback: () => {
+                countdown -= 0.01; 
+                if (countdown <= 0) {
+                    this.timerText.destroy();
+                    this.lavaActive = true; 
+                } else {
+                    this.timerText.setText(`Lava incoming in: ${countdown.toFixed(3)}`);
+                }
+            },
+            repeat: countdown * 100 // Runs until 0
+        });
+    }
+
+    update() {
+        if (this.gameOver || !this.lavaActive) return;
+
+        // Slowly rise the lava after the countdown ends
         this.lava.y -= this.lavaRiseSpeed;
 
         // Check if player is below lava level
@@ -53,15 +91,10 @@ class Lava {
     }
 
     handleLavaCollision() {
-        // Handle player death when touching lava
         this.gameOver = true;
-
-        // Tint player red and stop movement
         this.scene.player.sprite.setTint(0xff0000);
-        this.scene.player.stopMovement(); // Call the new function to stop movement
+        this.scene.player.stopMovement();
         this.scene.camera.stopFollow();
-
-        // Create the "Game Over" screen
         this.createGameOverScreen();
     }
 
@@ -69,7 +102,6 @@ class Lava {
         const width = this.scene.game.config.width / 2;
         const height = this.scene.game.config.height / 2;
 
-        // Dark transparent overlay
         const overlay = this.scene.add.rectangle(
             width,
             height,
@@ -85,9 +117,8 @@ class Lava {
             fontStyle: 'bold',
             stroke: '#000000',
             strokeThickness: 4
-    }
+        };
 
-        // "Game Over" text
         const gameOverText = this.scene.add.text(
             width,
             height - 50,
@@ -101,7 +132,6 @@ class Lava {
             }
         ).setOrigin(0.5).setScrollFactor(0);
 
-        // Retry button
         const retryButton = this.scene.add.text(
             width,
             height + 50,
@@ -109,7 +139,6 @@ class Lava {
             textStyle
         ).setOrigin(0.5).setScrollFactor(0).setInteractive();
 
-        // Retry button click event
         retryButton.on('pointerdown', () => {
             this.scene.restartGame();
         });
@@ -124,6 +153,5 @@ class Lava {
         returnHomeButton.on('pointerdown', () => {
             this.scene.scene.start('StartScreen');
         });
-
     }
 }
